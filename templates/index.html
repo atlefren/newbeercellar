@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <h1>Hei</h1>
+        <ul>
+            {% for beer in beers %}
+            <li>{{beer.name}}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
