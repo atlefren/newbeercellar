@@ -4,6 +4,7 @@
 
     {% block css %}
     {{ super() }}
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='js/lib/bootstrap-datepicker/css/datepicker3.css')}}">
     <style type="text/css">
         .td-20 {
             width: 20%;
@@ -24,7 +25,8 @@
     {% endblock %}
 
     {% block js %}
-        {{ super() }}    
+        {{ super() }}
+        <script type="text/javascript" src="{{url_for('static', filename='js/lib/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/Autocomplete.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/BottleList.js')}}"></script>
         <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/BottleCreator.js')}}"></script>

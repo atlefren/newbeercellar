@@ -20,15 +20,20 @@ var Cellar = this.Cellar || {};
 
 
     var DatePicker = React.createClass({
+
+        componentDidMount: function() {
+            $(this.getDOMNode()).datepicker({
+                format: 'dd.mm.yyyy'
+            });
+        },
+
         render: function () {
             return (
                 <input 
-                    type="text" 
-                    className="form-control" 
-                    placeholder={this.props.placeholder} />
+                    placeholder="dd.mm.yyyy"
+                    className="form-control" />
             );
         }
-
     });
 
     ns.BottleCreator = React.createClass({
