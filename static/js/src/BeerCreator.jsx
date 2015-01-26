@@ -14,6 +14,20 @@ function dateOrNull(value) {
     return value;
 }
 
+
+var DatePicker = React.createClass({
+
+    render: function () {
+        return (
+            <input 
+                type="text" 
+                className="form-control" 
+                placeholder={this.props.placeholder} />
+        );
+    }
+
+});
+
 var BeerCreator = React.createClass({
 
     getInitialState: function() {
@@ -65,36 +79,36 @@ var BeerCreator = React.createClass({
             <table className="table">
                 <tbody>
                     <tr>
-                        <td>
+                        <td className="td-20">
                             <Autocomplete 
                                 placeholder="Brewery" 
                                 url='/search/brewery' 
                                 select={this.selectBrewery} />
                           </td>
-                          <td>
+                          <td className="td-20">
                             <Autocomplete 
                                 placeholder="Beer" 
                                 url='/search/beer'
                                 extraParams={beerSearchParams}
                                 select={this.selectBeer} />
                           </td>
-                          <td>
+                          <td className="td-10">
                             <input type="text" ref="batch" className="form-control" placeholder="bath #"/>
                           </td>
-                          <td>
-                            <input type="date" ref="brewdate" className="form-control" placeholder="brew date"/>
+                          <td  className="td-10">
+                            <DatePicker ref="brewdate" placeholder="brew date"/>
                           </td>
-                          <td>
-                            <input type="date" ref="bbfdate" className="form-control"  placeholder="best before date"/>
+                          <td  className="td-10">
+                            <DatePicker ref="bbfdate" placeholder="best before date"/>                            
                           </td>
-                          <td>
+                          <td  className="td-5"> 
                             <input type="date" ref="size" className="form-control" placeholder="size (cl)"/>
                           </td>
-                          <td>
+                          <td  className="td-5">
                             <input type="number" defaultValue="1" ref="amount" className="form-control"/>
                           </td>
-                          <td>
-                            <input type="text" ref="comment" className="form-control"/>
+                          <td className="td-20"> 
+                            <textarea ref="comment" className="form-control" />
                           </td>
                     </tr>
                     <tr colSpan="8">

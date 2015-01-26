@@ -1,6 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Beercellar - {{cellar_name}}{% endblock %}
+    {% block title %}Beercellar - {{cellar_name}}{% endblock %}
+
+    {% block css %}
+    {{ super() }}
+    <style type="text/css">
+        .td-20 {
+            width: 20%;
+        }
+        .td-10 {
+            width: 10%;
+        }
+        .td-5 {
+            width: 5%;
+        }
+    </style>
+    {% endblock %}
 
     {% block main %}
         {{ super() }}

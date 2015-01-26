@@ -2,14 +2,14 @@ var Bottle = React.createClass({
     render: function () {
         return (
             <tr>
-                <td>{this.props.bottle.breweryName}</td>
-                <td>{this.props.bottle.beerName}</td>
-                <td>{this.props.bottle.batchNo}</td>
-                <td>{this.props.bottle.brewDate}</td>
-                <td>{this.props.bottle.bbfDate}</td>
-                <td>{this.props.bottle.size}</td>
-                <td>{this.props.bottle.amount}</td>
-                <td>{this.props.bottle.comment}</td>
+                <td className="td-20">{this.props.bottle.breweryName}</td>
+                <td className="td-20">{this.props.bottle.beerName}</td>
+                <td className="td-10">{this.props.bottle.batchNo}</td>
+                <td className="td-10">{this.props.bottle.brewDate}</td>
+                <td className="td-10">{this.props.bottle.bbfDate}</td>
+                <td className="td-5">{this.props.bottle.size}</td>
+                <td className="td-5">{this.props.bottle.amount}</td>
+                <td className="td-20">{this.props.bottle.comment}</td>
             </tr>
         );
     }

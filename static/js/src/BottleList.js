@@ -2,14 +2,14 @@ var Bottle = React.createClass({displayName: "Bottle",
     render: function () {
         return (
             React.createElement("tr", null, 
-                React.createElement("td", null, this.props.bottle.breweryName), 
-                React.createElement("td", null, this.props.bottle.beerName), 
-                React.createElement("td", null, this.props.bottle.batchNo), 
-                React.createElement("td", null, this.props.bottle.brewDate), 
-                React.createElement("td", null, this.props.bottle.bbfDate), 
-                React.createElement("td", null, this.props.bottle.size), 
-                React.createElement("td", null, this.props.bottle.amount), 
-                React.createElement("td", null, this.props.bottle.comment)
+                React.createElement("td", {className: "td-20"}, this.props.bottle.breweryName), 
+                React.createElement("td", {className: "td-20"}, this.props.bottle.beerName), 
+                React.createElement("td", {className: "td-10"}, this.props.bottle.batchNo), 
+                React.createElement("td", {className: "td-10"}, this.props.bottle.brewDate), 
+                React.createElement("td", {className: "td-10"}, this.props.bottle.bbfDate), 
+                React.createElement("td", {className: "td-5"}, this.props.bottle.size), 
+                React.createElement("td", {className: "td-5"}, this.props.bottle.amount), 
+                React.createElement("td", {className: "td-20"}, this.props.bottle.comment)
             )
         );
     }
