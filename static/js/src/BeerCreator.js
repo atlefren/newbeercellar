@@ -47,7 +47,7 @@ var BeerCreator = React.createClass({displayName: "BeerCreator",
     },
 
     cancel: function () {
-        this.props.cancelCreate();
+        this.props.cancelAdd();
     },
 
     save: function () {
