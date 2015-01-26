@@ -4,6 +4,26 @@ New Beercellar
 A simple web app to keep track of beers.
 
 
+Components
+----------
+
+1. A command line script to get the ratebeer dump file and insert to a postgres db
+2. A simple Flask API in Python to search for beers/breweries and add bottles to a cellar
+3. A Web Gui using React to display and add bottles to a cellar
+
+
+Todos
+-----
+- User handling (login via Google?)
+- Edit bottle
+- better search
+- search in cellar(s)
+- create more cellars
+- sort table
+- delete/drink bottle
+- fix setup routine!
+
+
 Setup
 -----
 
