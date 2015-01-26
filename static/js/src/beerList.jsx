@@ -16,15 +16,15 @@ var TableHeader = React.createClass({
     }
 });
 
-var BeerTable = React.createClass({
+var Cellar = React.createClass({
 
     getInitialState: function () {
-        return {beers: _.clone(this.props.beers), showCreate: false};
+        return {bottles: _.clone(this.props.bottles), showCreate: false};
     },
 
-    beerAdded: function (beer) {
+    bottleAdded: function (bottle) {
         this.setState({
-            beers: this.state.beers.concat([beer]),
+            bottles: this.state.bottles.concat([bottle]),
             showCreate: false
         });
     },
@@ -41,9 +41,9 @@ var BeerTable = React.createClass({
         var creator = null;
         var addClass = "btn btn-primary";
         if (this.state.showCreate) {
-            creator = <BeerCreator 
+            creator = <BottleCreator 
                         cellarId={this.props.cellarId}
-                        beerAdded={this.beerAdded} 
+                        bottleAdded={this.bottleAdded} 
                         cancelAdd={this.cancelAdd}/>;
             addClass += ' hidden';                        
         }
@@ -52,7 +52,7 @@ var BeerTable = React.createClass({
             <div>
                 <table className="table">
                     <TableHeader/>
-                    <BottleList bottles={this.state.beers}/>
+                    <BottleList bottles={this.state.bottles}/>
                 </table>
                 {creator}
                 <button 
@@ -64,9 +64,9 @@ var BeerTable = React.createClass({
     }
 });
 
-function createList(cellarId, beers) {
+function createList(cellarId, bottles) {
     React.render(
-      <BeerTable beers={beers} cellarId={cellarId} />,
+      <Cellar bottles={bottles} cellarId={cellarId} />,
       document.getElementById('beer_table')
     );
 }

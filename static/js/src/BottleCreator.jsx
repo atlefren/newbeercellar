@@ -28,7 +28,7 @@ var DatePicker = React.createClass({
 
 });
 
-var BeerCreator = React.createClass({
+var BottleCreator = React.createClass({
 
     getInitialState: function() {
         return {beerId: null, breweryId: null};
@@ -42,8 +42,8 @@ var BeerCreator = React.createClass({
         this.setState({beerId: beer.id});
     },
 
-    beerAdded: function (beer) {
-        this.props.beerAdded(beer);
+    bottleAdded: function (bottle) {
+        this.props.bottleAdded(bottle);
     },
 
     cancel: function () {
@@ -66,7 +66,7 @@ var BeerCreator = React.createClass({
             url: "/cellar/" + this.props.cellarId + "/add/",
             type: "POST",
             data: JSON.stringify(data),
-            success: this.beerAdded,
+            success: this.bottleAdded,
             contentType: 'application/json',
             dataType: 'json'
         });

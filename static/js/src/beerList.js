@@ -16,15 +16,15 @@ var TableHeader = React.createClass({displayName: "TableHeader",
     }
 });
 
-var BeerTable = React.createClass({displayName: "BeerTable",
+var Cellar = React.createClass({displayName: "Cellar",
 
     getInitialState: function () {
-        return {beers: _.clone(this.props.beers), showCreate: false};
+        return {bottles: _.clone(this.props.bottles), showCreate: false};
     },
 
-    beerAdded: function (beer) {
+    bottleAdded: function (bottle) {
         this.setState({
-            beers: this.state.beers.concat([beer]),
+            bottles: this.state.bottles.concat([bottle]),
             showCreate: false
         });
     },
@@ -41,9 +41,9 @@ var BeerTable = React.createClass({displayName: "BeerTable",
         var creator = null;
         var addClass = "btn btn-primary";
         if (this.state.showCreate) {
-            creator = React.createElement(BeerCreator, {
+            creator = React.createElement(BottleCreator, {
                         cellarId: this.props.cellarId, 
-                        beerAdded: this.beerAdded, 
+                        bottleAdded: this.bottleAdded, 
                         cancelAdd: this.cancelAdd});
             addClass += ' hidden';                        
         }
@@ -52,7 +52,7 @@ var BeerTable = React.createClass({displayName: "BeerTable",
             React.createElement("div", null, 
                 React.createElement("table", {className: "table"}, 
                     React.createElement(TableHeader, null), 
-                    React.createElement(BottleList, {bottles: this.state.beers})
+                    React.createElement(BottleList, {bottles: this.state.bottles})
                 ), 
                 creator, 
                 React.createElement("button", {
@@ -64,9 +64,9 @@ var BeerTable = React.createClass({displayName: "BeerTable",
     }
 });
 
-function createList(cellarId, beers) {
+function createList(cellarId, bottles) {
     React.render(
-      React.createElement(BeerTable, {beers: beers, cellarId: cellarId}),
+      React.createElement(Cellar, {bottles: bottles, cellarId: cellarId}),
       document.getElementById('beer_table')
     );
 }
