@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Beercellar - {{cellar_name}}{% endblock %}
+
+    {% block main %}
+        {{ super() }}
+        <h1>{{cellar_name}}</h1>
+        <div id="beer_table"></div>        
+    {% endblock %}
+
+    {% block js %}
+        {{ super() }}    
+        <script type="text/javascript" src="{{url_for('static', filename='js/src/Autocomplete.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/src/BottleList.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/src/BeerCreator.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/src/beerList.js')}}"></script>
+
+        <script type="text/javascript">
+            (function () {
+                'use strict';
+                var bottles = {{bottles | safe}};
+                createList(bottles); 
+            }());     
+        </script>
+    {% endblock %}
+  </body>
+</html>

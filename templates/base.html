@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='js/lib/bootstrap/dist/css/bootstrap.css')}}">
+  </head>
+  <body>
+    <div class="container-fluid">
+        {% block main %}
+        {% endblock %}
+    </div>
+    
+    {% block js %}
+    <script type="text/javascript" src="{{url_for('static', filename='js/lib/jquery/dist/jquery.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/lib/underscore/underscore-min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/lib/react/react.js')}}"></script>
+    {% endblock %}
+  </body>
+</html>

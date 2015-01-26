@@ -12,7 +12,11 @@ def create_views(app):
     def view_cellar(cellar_id):
         cellar = current_app.db_session.query(Cellar).get(cellar_id)
         bottles = [bottle.serialize for bottle in cellar.bottles]
-        return render_template('index.html', bottles=json.dumps(bottles))
+        return render_template(
+            'cellar.html',
+            bottles=json.dumps(bottles),
+            cellar_name=cellar.name
+        )
 
     @app.route('/search/beer')
     def search():
