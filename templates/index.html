@@ -40,7 +40,7 @@
 
     <script type="text/javascript">
 
-
+    /*
      var beers = [
          {
              "breweryName": "Nøgne Ø",
@@ -62,8 +62,10 @@
              "amount": 1
          }
      ];
+     */
+     var bottles = {{bottles | safe}};
 
-     createList(beers);
+     createList(bottles);
 
      /*
      function addBeer(beer) {

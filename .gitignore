@@ -1,2 +1,3 @@
 *.pyc
 beers.zip
+static/js/src/.module-cache/

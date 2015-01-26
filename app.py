@@ -3,13 +3,16 @@ import os, json
 from flask import Flask, render_template, request, current_app, Response
 
 from database import init_db
-from models import RbBeer, RbBrewery
+from models import RbBeer, RbBrewery, Bottle, Cellar
 
 
 def create_views(app):
-    @app.route('/')
-    def index():
-        return render_template('index.html')
+
+    @app.route('/cellar/<int:cellar_id>')
+    def view_cellar(cellar_id):
+        cellar = current_app.db_session.query(Cellar).get(cellar_id)
+        bottles = [bottle.serialize for bottle in cellar.bottles]
+        return render_template('index.html', bottles=json.dumps(bottles))
 
     @app.route('/search/beer')
     def search():
@@ -32,27 +35,25 @@ def create_views(app):
         return Response(json.dumps(x), content_type='application/json')
 
     @app.route('/save', methods=['POST'])
-    def save_item():
+    def save_bottle():
         data = request.json
         db = current_app.db_session
         brewery = db.query(RbBrewery).get(data['breweryId'])
         beer = db.query(RbBeer).get(data['beerId'])
 
-        return_data = {
-            "breweryName": brewery.name,
-            "beerName": beer.name,
-            "beerId": beer.id,
-            "batchNo": data.get('batchNo', None),
-            "brewDate": data.get('brewDate', None),
-            "bbfDate": data.get('bbfDate', None),
-            "size": data.get('size', None),
-            "amount": data.get('amount', 1),
-            "comment": data.get('comment', None),
-        }
-        return Response(json.dumps(return_data), content_type='application/json', status=201)
-        #res = db.query(RbBrewery).filter(RbBrewery.name.ilike('%' + query + '%'))        
-        #x = [brewery.serialize for brewery in res.limit(10).all()]
-        #return Response(json.dumps(x), content_type='application/json')
+        cellar = db.query(Cellar).get(1)
+
+        bottle = Bottle(beer, cellar, data)
+        db.add(bottle)
+        db.commit()
+        
+        return_data = bottle.serialize
+        return Response(
+            json.dumps(return_data),
+            content_type='application/json',
+            status=201
+        )
+        
 
 def create_app(debug):
     app = Flask(__name__)

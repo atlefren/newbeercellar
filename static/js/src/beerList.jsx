@@ -125,6 +125,21 @@ var Autocomplete = React.createClass({
     }
 });
 
+function intOrNull(value) {
+    var conv = parseInt(value, 10);
+    if (_.isNaN(conv)) {
+        return null;
+    }
+    return conv;
+}
+
+function dateOrNull(value) {
+    if (value === '') {
+        return null;
+    }
+    return value;
+}
+
 var BeerCreator = React.createClass({
 
     getInitialState: function() {
@@ -144,6 +159,7 @@ var BeerCreator = React.createClass({
     },
 
     beerAdded: function (beer) {
+        console.log(beer);
         this.props.beerAdded(beer);
         this.setState({showCreate: false});
     },
@@ -153,9 +169,9 @@ var BeerCreator = React.createClass({
              "breweryId": this.state.breweryId,
              "beerId": this.state.beerId,
              "batchNo": this.refs.batch.getDOMNode().value,
-             "brewDate": this.refs.brewdate.getDOMNode().value,
-             "bbfDate": this.refs.bbfdate.getDOMNode().value,
-             "size": this.refs.size.getDOMNode().value,
+             "brewDate": dateOrNull(this.refs.brewdate.getDOMNode().value),
+             "bbfDate": dateOrNull(this.refs.bbfdate.getDOMNode().value),
+             "size": intOrNull(this.refs.size.getDOMNode().value),
              "amount": parseInt(this.refs.amount.getDOMNode().value, 10),
              "comment": this.refs.comment.getDOMNode().value
          };
