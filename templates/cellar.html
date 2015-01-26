@@ -25,10 +25,10 @@
 
     {% block js %}
         {{ super() }}    
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/Autocomplete.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/BottleList.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/BottleCreator.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/CellarApp.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/Autocomplete.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/BottleList.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/BottleCreator.js')}}"></script>
+        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/CellarApp.js')}}"></script>
 
         <script type="text/javascript">
             (function () {
