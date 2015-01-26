@@ -39,12 +39,15 @@ var BeerTable = React.createClass({
 
     render: function () {
         var creator = null;
+        var addClass = "btn btn-primary";
         if (this.state.showCreate) {
             creator = <BeerCreator 
                         cellarId={this.props.cellarId}
                         beerAdded={this.beerAdded} 
                         cancelAdd={this.cancelAdd}/>;
-        }   
+            addClass += ' hidden';                        
+        }
+
         return (
             <div>
                 <table className="table">
@@ -54,7 +57,7 @@ var BeerTable = React.createClass({
                 {creator}
                 <button 
                     type="button" 
-                    className="btn btn-primary"
+                    className={addClass}
                     onClick={this.toggleCreate}>Add Bottle</button>
             </div>
         );  
