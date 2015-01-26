@@ -41,8 +41,9 @@ var BeerTable = React.createClass({
         var creator = null;
         if (this.state.showCreate) {
             creator = <BeerCreator 
-                            beerAdded={this.beerAdded} 
-                            cancelAdd={this.cancelAdd}/>;
+                        cellarId={this.props.cellarId}
+                        beerAdded={this.beerAdded} 
+                        cancelAdd={this.cancelAdd}/>;
         }   
         return (
             <div>
@@ -60,9 +61,9 @@ var BeerTable = React.createClass({
     }
 });
 
-function createList(beers) {
+function createList(cellarId, beers) {
     React.render(
-      <BeerTable beers={beers}/>,
+      <BeerTable beers={beers} cellarId={cellarId} />,
       document.getElementById('beer_table')
     );
 }

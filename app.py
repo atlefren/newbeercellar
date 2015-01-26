@@ -38,14 +38,13 @@ def create_views(app):
         x = [brewery.serialize for brewery in res.limit(10).all()]
         return Response(json.dumps(x), content_type='application/json')
 
-    @app.route('/save', methods=['POST'])
-    def save_bottle():
+    @app.route('/cellar/<int:cellar_id>/add/', methods=['POST'])
+    def save_bottle(cellar_id):
         data = request.json
         db = current_app.db_session
         brewery = db.query(RbBrewery).get(data['breweryId'])
         beer = db.query(RbBeer).get(data['beerId'])
-
-        cellar = db.query(Cellar).get(1)
+        cellar = db.query(Cellar).get(cellar_id)
 
         bottle = Bottle(beer, cellar, data)
         db.add(bottle)

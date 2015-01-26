@@ -41,8 +41,9 @@ var BeerTable = React.createClass({displayName: "BeerTable",
         var creator = null;
         if (this.state.showCreate) {
             creator = React.createElement(BeerCreator, {
-                            beerAdded: this.beerAdded, 
-                            cancelAdd: this.cancelAdd});
+                        cellarId: this.props.cellarId, 
+                        beerAdded: this.beerAdded, 
+                        cancelAdd: this.cancelAdd});
         }   
         return (
             React.createElement("div", null, 
@@ -60,9 +61,9 @@ var BeerTable = React.createClass({displayName: "BeerTable",
     }
 });
 
-function createList(beers) {
+function createList(cellarId, beers) {
     React.render(
-      React.createElement(BeerTable, {beers: beers}),
+      React.createElement(BeerTable, {beers: beers, cellarId: cellarId}),
       document.getElementById('beer_table')
     );
 }

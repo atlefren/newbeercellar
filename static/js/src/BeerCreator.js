@@ -30,7 +30,6 @@ var BeerCreator = React.createClass({displayName: "BeerCreator",
 
     beerAdded: function (beer) {
         this.props.beerAdded(beer);
-        this.setState({showCreate: false});
     },
 
     cancel: function () {
@@ -39,18 +38,18 @@ var BeerCreator = React.createClass({displayName: "BeerCreator",
 
     save: function () {
         var data = {
-             "breweryId": this.state.breweryId,
-             "beerId": this.state.beerId,
-             "batchNo": this.refs.batch.getDOMNode().value,
-             "brewDate": dateOrNull(this.refs.brewdate.getDOMNode().value),
-             "bbfDate": dateOrNull(this.refs.bbfdate.getDOMNode().value),
-             "size": intOrNull(this.refs.size.getDOMNode().value),
-             "amount": parseInt(this.refs.amount.getDOMNode().value, 10),
-             "comment": this.refs.comment.getDOMNode().value
+            "breweryId": this.state.breweryId,
+            "beerId": this.state.beerId,
+            "batchNo": this.refs.batch.getDOMNode().value,
+            "brewDate": dateOrNull(this.refs.brewdate.getDOMNode().value),
+            "bbfDate": dateOrNull(this.refs.bbfdate.getDOMNode().value),
+            "size": intOrNull(this.refs.size.getDOMNode().value),
+            "amount": parseInt(this.refs.amount.getDOMNode().value, 10),
+            "comment": this.refs.comment.getDOMNode().value
          };
 
         $.ajax({
-            url: "/save",
+            url: "/cellar/" + this.props.cellarId + "/add/",
             type: "POST",
             data: JSON.stringify(data),
             success: this.beerAdded,
