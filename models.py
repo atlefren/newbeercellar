@@ -17,6 +17,13 @@ class RbBrewery(Base):
         assert(name != "")
         self.name = name
 
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
 
 class RbBeer(Base):
     __tablename__ = 'rb_beers'
@@ -38,3 +45,11 @@ class RbBeer(Base):
         self.brewery = brewery
         self.rating = rating
         self.num = num
+
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'brewery': self.brewery.name
+        }

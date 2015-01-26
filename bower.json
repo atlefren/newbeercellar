@@ -1,0 +1,21 @@
+{
+  "name": "newbeercellar",
+  "version": "0.0.0",
+  "authors": [
+    "Atle Frenvik Sveen <atle@frenviksveen.net>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/js/lib/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2",
+    "react": "~0.12.2",
+    "underscore": "~1.7.0"
+  }
+}

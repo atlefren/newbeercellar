@@ -12,7 +12,7 @@ def init_db(echo=False):
 
     connection_string = os.environ.get(
         'DATABASE_URL',
-        'sqlite:///file.db'
+        'postgresql://atlefren:nisse@localhost:5432/beer'
     )
     engine = create_engine(connection_string, convert_unicode=True, echo=echo)
     db_session = scoped_session(sessionmaker(
