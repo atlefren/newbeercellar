@@ -19,10 +19,9 @@ Todos
 - better search
 - search in cellar(s)
 - create more cellars
-- sort table
 - delete/drink bottle
 - fix setup routine!
-
+- add tags
 
 Setup
 -----
