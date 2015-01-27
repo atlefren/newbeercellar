@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime
+from datetime import datetime
 from sqlalchemy import (Column, Integer, String, Numeric, ForeignKey, Text, Date)
 from sqlalchemy.orm import relationship
 
@@ -23,6 +23,9 @@ def iso_or_none(date):
         return date.isoformat()
     return None
 
+def parse_date(date):
+    return date
+
 
 class Bottle(Base):
     __tablename__ = 'bottles'
@@ -34,7 +37,7 @@ class Bottle(Base):
     batch_no = Column(String, nullable=True)
     brew_date = Column(Date, nullable=True)
     best_before_date = Column(Date, nullable=True)
-    date_added = Column(Date, nullable=False, default=datetime.datetime.now)
+    date_added = Column(Date, nullable=False, default=datetime.now)
     date_removed = Column(Date, nullable=True)
     
     beer_id = Column(Integer, ForeignKey('rb_beers.id'), nullable=False)
@@ -53,8 +56,8 @@ class Bottle(Base):
         self.size = data.get('size', None)
         self.comment = data.get('comment', None)
         self.batch_no = data.get('batchNo', None)
-        self.brew_date = data.get('brewDate', None)
-        self.best_before_date = data.get('bbfDate', None)
+        self.brew_date = parse_date(data.get('brewDate', None))
+        self.best_before_date = parse_date(data.get('bbfDate', None))
 
     @property
     def serialize(self):

@@ -15,7 +15,7 @@ var Cellar = this.Cellar || {};
         if (value === '') {
             return null;
         }
-        return value;
+        return moment(value, "DD.MM.YYYY").format('YYYY-MM-DD');
     }
 
 
