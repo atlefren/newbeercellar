@@ -46,15 +46,20 @@ var Cellar = this.Cellar || {};
     ns.BottleList = React.createClass({displayName: "BottleList",
       
         render: function() {
-          var bottleNodes = this.props.bottles.map(function (bottle) {
-              return (
-                  React.createElement(Bottle, {bottle: bottle, key: bottle.id})
-              );
-          });
-          return (
-              React.createElement("tbody", null, bottleNodes)
-              
-          );
+            var bottleNodes = _.chain(this.props.bottles)
+                .filter(function (bottle) {
+                    return !bottle.hidden;
+                })
+                .map(function (bottle) {
+                    return (
+                        React.createElement(Bottle, {bottle: bottle, key: bottle.id})
+                    );
+                })
+                .value();
+
+            return (
+                React.createElement("tbody", null, bottleNodes)
+            );
         }
     });  
 }(Cellar));
