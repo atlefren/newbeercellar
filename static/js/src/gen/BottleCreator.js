@@ -71,7 +71,7 @@ var Cellar = this.Cellar || {};
              };
 
             $.ajax({
-                url: "/cellar/" + this.props.cellarId + "/add/",
+                url: "/api/v1/cellar/" + this.props.cellarId + "/add/",
                 type: "POST",
                 data: JSON.stringify(data),
                 success: this.bottleAdded,
@@ -90,13 +90,13 @@ var Cellar = this.Cellar || {};
                             React.createElement("td", {className: "td-20"}, 
                                 React.createElement(ns.Autocomplete, {
                                     placeholder: "Brewery", 
-                                    url: "/search/brewery", 
+                                    url: "/api/v1/search/brewery", 
                                     select: this.selectBrewery})
                               ), 
                               React.createElement("td", {className: "td-20"}, 
                                 React.createElement(ns.Autocomplete, {
                                     placeholder: "Beer", 
-                                    url: "/search/beer", 
+                                    url: "/api/v1/search/beer", 
                                     extraParams: beerSearchParams, 
                                     select: this.selectBeer})
                               ), 

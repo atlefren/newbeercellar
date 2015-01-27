@@ -6,23 +6,31 @@ from database import init_db
 from models import RbBeer, RbBrewery, Bottle, Cellar
 
 
+def get_cellar_data(cellar_id):
+    cellar = current_app.db_session.query(Cellar).get(cellar_id)
+    bottles = sorted(
+        [bottle.serialize for bottle in cellar.bottles],
+        key=lambda x: x["id"],
+        reverse=True
+    )
+    return {"cellarName": cellar.name, "bottles": bottles}
+
+
 def create_views(app):
 
     @app.route('/cellar/<int:cellar_id>')
     def view_cellar(cellar_id):
-        cellar = current_app.db_session.query(Cellar).get(cellar_id)
-        bottles = sorted(
-            [bottle.serialize for bottle in cellar.bottles],
-            key=lambda x: x["id"],
-            reverse=True
-        )
+        cellar_data = get_cellar_data(cellar_id)
         return render_template(
             'cellar.html',
-            bottles=json.dumps(bottles),
-            cellar_name=cellar.name
+            bottles=json.dumps(cellar_data['bottles']),
+            cellar_name=cellar_data['cellarName']
         )
 
-    @app.route('/search/beer')
+
+def create_api(app, api_prefix):
+
+    @app.route(api_prefix + '/search/beer/')
     def search():
         query = request.args.get('q')
         db = current_app.db_session
@@ -34,7 +42,7 @@ def create_views(app):
         x = [beer.serialize for beer in res.limit(10).all()]
         return Response(json.dumps(x), content_type='application/json')
 
-    @app.route('/search/brewery')
+    @app.route(api_prefix + '/search/brewery/')
     def search_brewery():
         query = request.args.get('q')
         db = current_app.db_session
@@ -42,7 +50,7 @@ def create_views(app):
         x = [brewery.serialize for brewery in res.limit(10).all()]
         return Response(json.dumps(x), content_type='application/json')
 
-    @app.route('/cellar/<int:cellar_id>/add/', methods=['POST'])
+    @app.route(api_prefix + '/cellar/<int:cellar_id>/add/', methods=['POST'])
     def save_bottle(cellar_id):
         data = request.json
         db = current_app.db_session
@@ -61,6 +69,14 @@ def create_views(app):
             status=201
         )
         
+    @app.route(api_prefix + '/cellar/<int:cellar_id>')
+    def cellar_data(cellar_id):
+        cellar_data = get_cellar_data(cellar_id)
+        return Response(
+            json.dumps(cellar_data),
+            content_type='application/json'    
+        )
+
 
 def create_app(debug):
     app = Flask(__name__)
@@ -74,5 +90,5 @@ if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app = create_app(os.environ.get('DEBUG', False))
     create_views(app)
+    create_api(app, '/api/v1')
     app.run(host='0.0.0.0', port=port, debug=True)
-
