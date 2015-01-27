@@ -15,6 +15,35 @@
         .td-5 {
             width: 5%;
         }
+
+        /* enable absolute positioning */
+        .inner-addon { 
+            position: relative; 
+        }
+
+        /* style icon */
+        .inner-addon .glyphicon {
+          position: absolute;
+          padding: 10px;
+          pointer-events: none;
+        }
+
+        /* align icon */
+        span.left-addon { left:  0px;}
+        span.right-addon { right: 0px;}
+
+        /* add padding  */
+        .left-addon input  { 
+            padding-left:  30px;
+        }
+        .right-addon input { 
+            padding-right: 30px;
+        }
+
+        span.clear-btn {
+            cursor: pointer;
+        }
+
     </style>
     {% endblock %}
 

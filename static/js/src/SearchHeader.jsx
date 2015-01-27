@@ -18,21 +18,29 @@ var Cellar = this.Cellar || {};
             }
         },
 
+        clear: function () {
+            this.setState({phrase: null});
+            this.props.search(null);
+        },
+
         render: function () {
+            var clearClass = "clear-btn right-addon glyphicon glyphicon-remove-circle";
+            if (!this.state.phrase) {
+                clearClass += " hidden";    
+            }
             return (
-                <div className="input-group">
-                  <input 
+                <div className="inner-addon left-addon right-addon">
+                    <span className="left-addon glyphicon glyphicon-search"></span>
+                    <input 
                     onChange={this.search}
+                    value={this.state.phrase}
                     ref="value"
                     type="text"
                     className="form-control"
                     placeholder="Filter by beer or brewery.." />
-                  <span className="input-group-btn">
-                    <button className="btn btn-default" type="button">
-                        <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
-                    </button>
-                  </span>
-                </div>   
+                    <span className={clearClass} onClick={this.clear}></span>
+                </div>
+                
             );
         }
     });

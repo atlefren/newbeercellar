@@ -18,21 +18,29 @@ var Cellar = this.Cellar || {};
             }
         },
 
+        clear: function () {
+            this.setState({phrase: null});
+            this.props.search(null);
+        },
+
         render: function () {
+            var clearClass = "clear-btn right-addon glyphicon glyphicon-remove-circle";
+            if (!this.state.phrase) {
+                clearClass += " hidden";    
+            }
             return (
-                React.createElement("div", {className: "input-group"}, 
-                  React.createElement("input", {
+                React.createElement("div", {className: "inner-addon left-addon right-addon"}, 
+                    React.createElement("span", {className: "left-addon glyphicon glyphicon-search"}), 
+                    React.createElement("input", {
                     onChange: this.search, 
+                    value: this.state.phrase, 
                     ref: "value", 
                     type: "text", 
                     className: "form-control", 
                     placeholder: "Filter by beer or brewery.."}), 
-                  React.createElement("span", {className: "input-group-btn"}, 
-                    React.createElement("button", {className: "btn btn-default", type: "button"}, 
-                        React.createElement("span", {className: "glyphicon glyphicon-search", "aria-hidden": "true"})
-                    )
-                  )
-                )   
+                    React.createElement("span", {className: clearClass, onClick: this.clear})
+                )
+                
             );
         }
     });
