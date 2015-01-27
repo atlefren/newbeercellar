@@ -61,7 +61,7 @@ Setup
 
 9. Run the app
     
-    python app.py
+    python runapp.py
 
 10. Tell @atlefren that this is stupid, use some tool to simplify this!
 

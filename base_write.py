@@ -2,8 +2,8 @@
 
 from sqlalchemy.orm.exc import NoResultFound
 
-from database import init_db
-from models import (RbBeer, RbBrewery)
+from newbeercellar.database import init_db
+from newbeercellar.models import (RbBeer, RbBrewery)
 
 
 def get_database():

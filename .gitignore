@@ -1,4 +1,4 @@
 *.pyc
 beers.zip
-static/js/src/gen/.module-cache/
-static/js/lib
+newbeercellar/static/js/src/gen/.module-cache/
+newbeercellar/static/js/lib
