@@ -2,24 +2,6 @@ var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
 
-    var TableHeader = React.createClass({displayName: "TableHeader",
-
-        render: function () {
-            return (React.createElement("thead", null, 
-              React.createElement("tr", null, 
-                React.createElement("th", null, "Brewery"), 
-                React.createElement("th", null, "Beer"), 
-                React.createElement("th", null, "Batch #"), 
-                React.createElement("th", null, "Brew date"), 
-                React.createElement("th", null, "Best before date"), 
-                React.createElement("th", null, "Size"), 
-                React.createElement("th", null, "Amount"), 
-                React.createElement("th", null, "Comment")
-              )
-            ));
-        }
-    });
-
     var Cellar = React.createClass({displayName: "Cellar",
 
         getInitialState: function () {
@@ -41,6 +23,14 @@ var Cellar = this.Cellar || {};
             this.setState({showCreate: true});
         },
 
+        sortBy: function (key, type, order) {
+            var sortFunc = ns.createSort(type, key, order);
+            var sorted = this.state.bottles.sort(sortFunc);
+            this.setState({
+                bottles: sorted
+            });
+        },
+
         render: function () {
             var creator = null;
             var addClass = "btn btn-primary";
@@ -55,7 +45,7 @@ var Cellar = this.Cellar || {};
             return (
                 React.createElement("div", null, 
                     React.createElement("table", {className: "table"}, 
-                        React.createElement(TableHeader, null), 
+                        React.createElement(ns.TableHeader, {sortBy: this.sortBy}), 
                         React.createElement(ns.BottleList, {bottles: this.state.bottles})
                     ), 
                     creator, 

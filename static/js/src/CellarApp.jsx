@@ -2,24 +2,6 @@ var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
 
-    var TableHeader = React.createClass({
-
-        render: function () {
-            return (<thead>
-              <tr>
-                <th>Brewery</th>
-                <th>Beer</th>
-                <th>Batch #</th>
-                <th>Brew date</th>
-                <th>Best before date</th>
-                <th>Size</th>
-                <th>Amount</th>
-                <th>Comment</th>
-              </tr>
-            </thead>);
-        }
-    });
-
     var Cellar = React.createClass({
 
         getInitialState: function () {
@@ -41,6 +23,14 @@ var Cellar = this.Cellar || {};
             this.setState({showCreate: true});
         },
 
+        sortBy: function (key, type, order) {
+            var sortFunc = ns.createSort(type, key, order);
+            var sorted = this.state.bottles.sort(sortFunc);
+            this.setState({
+                bottles: sorted
+            });
+        },
+
         render: function () {
             var creator = null;
             var addClass = "btn btn-primary";
@@ -55,7 +45,7 @@ var Cellar = this.Cellar || {};
             return (
                 <div>
                     <table className="table">
-                        <TableHeader/>
+                        <ns.TableHeader sortBy={this.sortBy} />
                         <ns.BottleList bottles={this.state.bottles}/>
                     </table>
                     {creator}
