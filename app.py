@@ -11,7 +11,11 @@ def create_views(app):
     @app.route('/cellar/<int:cellar_id>')
     def view_cellar(cellar_id):
         cellar = current_app.db_session.query(Cellar).get(cellar_id)
-        bottles = [bottle.serialize for bottle in cellar.bottles]
+        bottles = sorted(
+            [bottle.serialize for bottle in cellar.bottles],
+            key=lambda x: x["id"],
+            reverse=True
+        )
         return render_template(
             'cellar.html',
             bottles=json.dumps(bottles),

@@ -16,7 +16,7 @@ var Cellar = this.Cellar || {};
 
         bottleAdded: function (bottle) {
             this.setState({
-                bottles: this.state.bottles.concat([bottle]),
+                bottles: [bottle].concat(this.state.bottles),
                 showCreate: false
             });
         },
