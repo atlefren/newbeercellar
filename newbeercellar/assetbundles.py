@@ -20,6 +20,7 @@ js_cellar = Bundle(
 css_base = Bundle(
     'js/lib/bootstrap/dist/css/bootstrap.css',
     'css/header.css',
+    filters=['cssrewrite'],
     output='gen/css_base.css'
 )
 
@@ -28,5 +29,6 @@ css_cellar = Bundle(
     'js/lib/bootstrap-datepicker/css/datepicker3.css',
     'css/clear-btn.css',
     'css/table.css',
+    filters=['cssrewrite'],
     output='gen/css_cellar.css'
 )
