@@ -19,6 +19,17 @@ def serialize_cellar(cellar):
     }
 
 
+def user_owns_cellar(user_id, cellar_id):
+    try:
+        current_app.db_session.query(Cellar).filter(
+            Cellar.user_id == user_id,
+            Cellar.id == cellar_id
+        ).one()
+        return True
+    except NoResultFound:
+        return False
+
+
 def get_cellar_data(cellar_id):
     cellar = current_app.db_session.query(Cellar).get(cellar_id)
     if cellar:
@@ -39,3 +50,9 @@ def get_or_create_default_cellar(user):
         current_app.db_session.commit()
 
     return serialize_cellar(cellar)
+
+
+def cellars_for_user(user_id):
+    return current_app.db_session.query(Cellar).filter(
+        Cellar.user_id == user_id
+    ).all()

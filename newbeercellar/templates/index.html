@@ -3,6 +3,25 @@
 {% block title %}Beercellar{% endblock %}
 
 {% block main %}
-<h1>New beer cellar</h1>
-<a href="{{url_for('login')}}">Log in (using google)</a>
+
+  <div class="jumbotron">
+      <div class="container">
+        <h1>New BeerCellar</h1>
+        <p>Tired of using a spreadsheet to keep tracks of what beers you have stored? Well, this app aims to remedy that, by letting you register your beers online, accessible everywhere!. <small>(that is: as soon as I make this site mobile-friendly..)</small></p>
+        <p>Using a RateBeer dump, you can search through a butload of beers and breweries to add to your cellar. </p>
+
+        <h2>Features</h2>
+        <ul>
+            <li>Add beers from ratebeer</li>
+            <li>Store a variety of attributes</li>
+            <li>Search and filter</li>
+        </ul>
+
+        <p>
+            <a class="btn btn-primary btn-lg" href="{{url_for('login')}}" role="button">
+                Log in (using google) &raquo;
+            </a>
+        </p>
+      </div>
+    </div>
 {% endblock %}

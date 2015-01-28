@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Beercellar - {{cellar_name}}{% endblock %}
+
+{% block main %}
+    {{ super() }}
+    <div class="container">
+      
+        <div class="row">
+            <div class="col-md-4">
+                <h2>My cellars</h2>
+                <div class="list-group">
+                  {% for cellar in cellars %}                
+                    <a href="{{url_for('view_cellar', cellar_id=cellar.id)}}" class="list-group-item">{{cellar.name}}</a>
+                  {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

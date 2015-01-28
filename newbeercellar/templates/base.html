@@ -4,12 +4,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='js/lib/bootstrap/dist/css/bootstrap.css')}}">
+    
     {% block css %}
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='js/lib/bootstrap/dist/css/bootstrap.css')}}">
+    <style type="text/css">
+    body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+    </style>
     {% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
               <a class="navbar-brand" href="{{url_for('index')}}">New Beercellar</a>
