@@ -3,10 +3,9 @@
     {% block title %}Beercellar - {{cellar_name}}{% endblock %}
 
     {% block css %}
-    {{ super() }}
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='js/lib/bootstrap-datepicker/css/datepicker3.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/table.css')}}">
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/clear-btn.css')}}">
+    {% assets "css_cellar" %}
+    <link type="text/css" rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}
     {% endblock %}
 
     {% block main %}

@@ -6,13 +6,9 @@
     <title>{% block title %}{% endblock %}</title>
     
     {% block css %}
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='js/lib/bootstrap/dist/css/bootstrap.css')}}">
-    <style type="text/css">
-    body {
-        padding-top: 50px;
-        padding-bottom: 20px;
-    }
-    </style>
+    {% assets "css_base" %}
+    <link type="text/css" rel="stylesheet" href="{{ ASSET_URL }}">
+    {% endassets %}    
     {% endblock %}
   </head>
   <body>

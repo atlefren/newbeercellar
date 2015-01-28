@@ -16,3 +16,17 @@ js_cellar = Bundle(
     'js/src/gen/CellarApp.js',
     output='gen/js_cellar.js'
 )
+
+css_base = Bundle(
+    'js/lib/bootstrap/dist/css/bootstrap.css',
+    'css/header.css',
+    output='gen/css_base.css'
+)
+
+css_cellar = Bundle(
+    css_base,
+    'js/lib/bootstrap-datepicker/css/datepicker3.css',
+    'css/clear-btn.css',
+    'css/table.css',
+    output='gen/css_cellar.css'
+)
