@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-import os
-
 
 Base = declarative_base()
 
 
-def init_db(echo=False):
-
-    connection_string = os.environ.get(
-        'DATABASE_URL',
-        'postgresql://atlefren:nisse@localhost:5432/beer'
-    )
+def init_db(connection_string='', echo=False):
     engine = create_engine(connection_string, convert_unicode=True, echo=echo)
     db_session = scoped_session(sessionmaker(
         autocommit=False,
@@ -22,5 +16,6 @@ def init_db(echo=False):
     ))
 
     Base.query = db_session.query_property()
+    import newbeercellar.models
     Base.metadata.create_all(engine)
     return db_session, Base.metadata, engine

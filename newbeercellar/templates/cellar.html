@@ -11,8 +11,10 @@
 
     {% block main %}
         {{ super() }}
-        <h1>{{cellar_name}}</h1>
-        <div id="beer_table"></div>
+        <div class="container-fluid">
+            <h1>{{cellar_name}}</h1>
+            <div id="beer_table"></div>
+        </div>
     {% endblock %}
 
     {% block js %}

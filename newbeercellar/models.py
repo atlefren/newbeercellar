@@ -1,19 +1,36 @@
 # -*- coding: utf-8 -*-
+
 from datetime import datetime
-from sqlalchemy import (Column, Integer, String, Numeric, ForeignKey, Text, Date)
+from sqlalchemy import (Column, Integer, String, Numeric, ForeignKey, Text,
+                        Date, DateTime)
 from sqlalchemy.orm import relationship
 
+from flask_login import UserMixin
+
 from database import Base
+
+
+class User(Base, UserMixin):
+    __tablename__ = "users"
+    id = Column('user_id', Integer, primary_key=True)
+    name = Column('name', String(20), unique=True, index=True)
+    google_id = Column('google_id', String(50), unique=True, index=True)
+    registered_on = Column('registered_on', DateTime)
+
+    def __init__(self, name=None, google_id=None):
+        self.name = name
+        self.google_id = google_id
+        self.registered_on = datetime.utcnow()
 
 
 class Cellar(Base):
     __tablename__ = 'cellars'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    #user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    #user = relationship('User', lazy=False)
+    # user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    # user = relationship('User', lazy=False)
     bottles = relationship("Bottle")
-    
+
     def __init__(self, name):
         self.name = name
 
@@ -23,13 +40,14 @@ def iso_or_none(date):
         return date.isoformat()
     return None
 
+
 def parse_date(date):
     return date
 
 
 class Bottle(Base):
     __tablename__ = 'bottles'
-    
+
     id = Column(Integer, primary_key=True)
     amount = Column(Integer, nullable=False, default=1)
     size = Column(Numeric, nullable=True)
@@ -39,15 +57,15 @@ class Bottle(Base):
     best_before_date = Column(Date, nullable=True)
     date_added = Column(Date, nullable=False, default=datetime.now)
     date_removed = Column(Date, nullable=True)
-    
+
     beer_id = Column(Integer, ForeignKey('rb_beers.id'), nullable=False)
     beer = relationship('RbBeer', lazy=False)
-    
+
     cellar_id = Column(Integer, ForeignKey('cellars.id'), nullable=False)
     cellar = relationship('Cellar', lazy=False)
-    
-    #user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    #user = relationship('User', lazy=False)
+
+    # user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    # user = relationship('User', lazy=False)
 
     def __init__(self, beer, cellar, data):
         self.beer = beer
@@ -82,7 +100,7 @@ class RbBrewery(Base):
     __tablename__ = 'rb_breweries'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(255), nullable=False)    
+    name = Column(String(255), nullable=False)
 
     def __init__(self, name):
         assert(name is not None)
