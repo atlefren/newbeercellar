@@ -5,52 +5,8 @@
     {% block css %}
     {{ super() }}
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='js/lib/bootstrap-datepicker/css/datepicker3.css')}}">
-    <style type="text/css">
-        .td-20 {
-            width: 20%;
-        }
-        .td-10 {
-            width: 10%;
-        }
-        .td-5 {
-            width: 5%;
-        }
-
-        span.clear-btn {
-            cursor: pointer;
-        }
-
-        div.filtersearch > .right {
-            position: absolute;
-            right: 8px;
-            top: 10px;
-        }
-
-        div.filtersearch > .left {
-            position: absolute;
-            left: 8px;
-            top: 10px;
-        }
-
-        div.filtersearch {
-            position:relative;
-        }
-
-        input.filtersearch {
-            background-color: transparent;
-            border: 0px solid;
-            height: 100%;
-            width: 100%;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-
-        input.filtersearch:focus {
-          outline-color: transparent;
-          outline-style: none;
-        }
-
-    </style>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/table.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/clear-btn.css')}}">
     {% endblock %}
 
     {% block main %}
