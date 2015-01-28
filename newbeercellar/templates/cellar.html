@@ -11,13 +11,15 @@
     {% block main %}
         {{ super() }}
         <div class="container-fluid">
-            <h1>
+            <h1 class="edit-header">
+                <a title="Edit cellar" href="{{url_for('edit_cellar', cellar_id=cellar_id)}}">
                 {{cellar_name}} 
                 <small>
-                    <a title="Edit cellar" href="{{url_for('edit_cellar', cellar_id=cellar_id)}}">
-                    <span class="glyphicon glyphicon-edit"></span>
-                    </a>
+                    
+                    <span class="edit-btn glyphicon glyphicon-edit"></span>
+                  
                 </small>
+                  </a>
             </h1>
             <div id="beer_table"></div>
         </div>

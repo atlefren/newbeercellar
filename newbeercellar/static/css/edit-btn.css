@@ -1,0 +1,13 @@
+.edit-btn {
+    display: none;
+    
+}
+
+.edit-header:hover .edit-btn {
+    display: inline;
+}
+
+.edit-header a, .edit-header a:hover {
+    text-decoration: none;
+    color: #333;
+}
