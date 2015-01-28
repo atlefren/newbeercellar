@@ -26,7 +26,7 @@ var Cellar = this.Cellar || {};
         render: function () {
             var clearClass = "right clear-btn glyphicon glyphicon-remove-circle";
             if (!this.state.phrase) {
-                //clearClass += " hidden";
+                clearClass += " hidden";
             }
             return (
                 <div className="filtersearch form-control">
