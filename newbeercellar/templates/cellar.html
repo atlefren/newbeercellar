@@ -17,16 +17,9 @@
 
     {% block js %}
         {{ super() }}
-        <script type="text/javascript" src="{{url_for('static', filename='js/lib/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/Util.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/SearchHeader.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/QuickFilter.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/Autocomplete.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/BottleList.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/BottleCreator.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/TableHeader.js')}}"></script>
-        <script type="text/javascript" src="{{url_for('static', filename='js/src/gen/CellarApp.js')}}"></script>
-
+        {% assets "js_cellar" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
         <script type="text/javascript">
             (function () {
                 'use strict';
