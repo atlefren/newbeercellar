@@ -16,22 +16,39 @@
             width: 5%;
         }
 
-
-
         span.clear-btn {
             cursor: pointer;
         }
 
-input.filtersearch {
-    background-color: transparent;
-    border: 0px solid;
-    height: 20px;
-    width: 160px;
-    position: relative;
-    left: 10px;
-    right: 10px;
-}
+        div.filtersearch > .right {
+            position: absolute;
+            right: 8px;
+            top: 10px;
+        }
 
+        div.filtersearch > .left {
+            position: absolute;
+            left: 8px;
+            top: 10px;
+        }
+
+        div.filtersearch {
+            position:relative;
+        }
+
+        input.filtersearch {
+            background-color: transparent;
+            border: 0px solid;
+            height: 100%;
+            width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        input.filtersearch:focus {
+          outline-color: transparent;
+          outline-style: none;
+        }
 
     </style>
     {% endblock %}

@@ -24,13 +24,13 @@ var Cellar = this.Cellar || {};
         },
 
         render: function () {
-            var clearClass = "clear-btn pull-right glyphicon glyphicon-remove-circle";
+            var clearClass = "right clear-btn glyphicon glyphicon-remove-circle";
             if (!this.state.phrase) {
-                clearClass += " hidden";
+                //clearClass += " hidden";
             }
             return (
-                React.createElement("div", {className: "form-control"}, 
-                    React.createElement("span", {className: "glyphicon glyphicon-search"}), 
+                React.createElement("div", {className: "filtersearch form-control"}, 
+                    React.createElement("span", {className: "left glyphicon glyphicon-search"}), 
                     React.createElement("input", {
                     className: "filtersearch", 
                     onChange: this.search, 
