@@ -3,12 +3,22 @@
 import json
 
 from flask import request, Response, current_app
+from flask.ext.login import current_user
+from flask_login import login_required
 
 from models import RbBeer, RbBrewery, Bottle, Cellar
 from newbeercellar import app
 from util import get_cellar_data
 
 api_prefix = '/api/v1'
+
+
+def generate_error(status_code, message):
+    return Response(
+        json.dumps({"message": message}),
+        content_type='application/json',
+        status=status_code
+    )
 
 
 @app.route(api_prefix + '/search/beer/')
@@ -34,11 +44,17 @@ def search_brewery():
 
 
 @app.route(api_prefix + '/cellar/<int:cellar_id>/add/', methods=['POST'])
+@login_required
 def save_bottle(cellar_id):
-    data = request.json
     db = current_app.db_session
-    beer = db.query(RbBeer).get(data['beerId'])
     cellar = db.query(Cellar).get(cellar_id)
+
+    if cellar.user_id != current_user.id:
+        return generate_error(403, 'Not your cellar!')
+
+    data = request.json
+
+    beer = db.query(RbBeer).get(data['beerId'])
 
     bottle = Bottle(beer, cellar, data)
     db.add(bottle)

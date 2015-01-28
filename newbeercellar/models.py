@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from sqlalchemy import (Column, Integer, String, Numeric, ForeignKey, Text,
-                        Date, DateTime)
+                        Date, DateTime, Boolean)
 from sqlalchemy.orm import relationship
 
 from flask_login import UserMixin
@@ -27,12 +27,15 @@ class Cellar(Base):
     __tablename__ = 'cellars'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    # user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    # user = relationship('User', lazy=False)
+    user_id = Column(Integer, ForeignKey('users.user_id'), nullable=False)
+    user = relationship('User', lazy=False)
     bottles = relationship("Bottle")
+    is_default = Column(Boolean, default=False)
 
-    def __init__(self, name):
+    def __init__(self, name, user, is_default=False):
         self.name = name
+        self.user = user
+        self.is_default = is_default
 
 
 def iso_or_none(date):
@@ -63,9 +66,6 @@ class Bottle(Base):
 
     cellar_id = Column(Integer, ForeignKey('cellars.id'), nullable=False)
     cellar = relationship('Cellar', lazy=False)
-
-    # user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    # user = relationship('User', lazy=False)
 
     def __init__(self, beer, cellar, data):
         self.beer = beer
