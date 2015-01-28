@@ -1,8 +1,8 @@
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
-    ns.SearchHeader = React.createClass({displayName: "SearchHeader",    
-        
+    ns.SearchHeader = React.createClass({displayName: "SearchHeader",
+
         getInitialState: function () {
             return {phrase: null};
         },
@@ -24,23 +24,23 @@ var Cellar = this.Cellar || {};
         },
 
         render: function () {
-            var clearClass = "clear-btn right-addon glyphicon glyphicon-remove-circle";
+            var clearClass = "clear-btn pull-right glyphicon glyphicon-remove-circle";
             if (!this.state.phrase) {
-                clearClass += " hidden";    
+                clearClass += " hidden";
             }
             return (
-                React.createElement("div", {className: "inner-addon left-addon right-addon"}, 
-                    React.createElement("span", {className: "left-addon glyphicon glyphicon-search"}), 
+                React.createElement("div", {className: "form-control"}, 
+                    React.createElement("span", {className: "glyphicon glyphicon-search"}), 
                     React.createElement("input", {
+                    className: "filtersearch", 
                     onChange: this.search, 
                     value: this.state.phrase, 
                     ref: "value", 
                     type: "text", 
-                    className: "form-control", 
                     placeholder: "Filter by beer or brewery.."}), 
                     React.createElement("span", {className: clearClass, onClick: this.clear})
                 )
-                
+
             );
         }
     });

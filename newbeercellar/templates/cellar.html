@@ -16,33 +16,22 @@
             width: 5%;
         }
 
-        /* enable absolute positioning */
-        .inner-addon { 
-            position: relative; 
-        }
 
-        /* style icon */
-        .inner-addon .glyphicon {
-          position: absolute;
-          padding: 10px;
-          pointer-events: none;
-        }
-
-        /* align icon */
-        span.left-addon { left:  0px;}
-        span.right-addon { right: 0px;}
-
-        /* add padding  */
-        .left-addon input  { 
-            padding-left:  30px;
-        }
-        .right-addon input { 
-            padding-right: 30px;
-        }
 
         span.clear-btn {
             cursor: pointer;
         }
+
+input.filtersearch {
+    background-color: transparent;
+    border: 0px solid;
+    height: 20px;
+    width: 160px;
+    position: relative;
+    left: 10px;
+    right: 10px;
+}
+
 
     </style>
     {% endblock %}
@@ -50,7 +39,7 @@
     {% block main %}
         {{ super() }}
         <h1>{{cellar_name}}</h1>
-        <div id="beer_table"></div>        
+        <div id="beer_table"></div>
     {% endblock %}
 
     {% block js %}
@@ -69,8 +58,8 @@
             (function () {
                 'use strict';
                 var bottles = {{bottles | safe}};
-                Cellar.createList(1, bottles); 
-            }());     
+                Cellar.createList(1, bottles);
+            }());
         </script>
     {% endblock %}
   </body>
