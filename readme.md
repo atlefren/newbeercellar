@@ -47,21 +47,21 @@ Setup
 
     bower install
 
-6. Setup a postgre-database and export variable
-    
-    export DATABASE_URL=postgresql://user:pass@host:port/basename
+6. Setup a postgre-database 
 
-7. Import ratebeer data
+7. copy newbeercellar/settings.py_template to newbeercellar/settings.py and fill in data
+
+8. Import ratebeer data
     
     python read_rb.py
 
-8. set up jsx-build
+9. set up jsx-build
     
      jsx --watch static/js/src/ static/js/src/gen/ -x jsx
 
-9. Run the app
+10. Run the app
     
     python runapp.py
 
-10. Tell @atlefren that this is stupid, use some tool to simplify this!
+11. Tell @atlefren that this is stupid, use some tool to simplify this!
 
