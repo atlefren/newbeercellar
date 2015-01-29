@@ -21,6 +21,11 @@ def generate_error(status_code, message):
     )
 
 
+def get_limit():
+    limit = request.args.get('limit', 10, type=int)
+    return limit if limit <= 100 else 100
+
+
 @app.route(api_prefix + '/search/beer/')
 def search():
     query = request.args.get('q')
@@ -30,7 +35,7 @@ def search():
     brewery_id = request.args.get('brewery', None)
     if brewery_id:
         res = res.filter(RbBeer.brewery_id == brewery_id)
-    x = [beer.serialize for beer in res.limit(10).all()]
+    x = [beer.serialize for beer in res.limit(get_limit()).all()]
     return Response(json.dumps(x), content_type='application/json')
 
 
@@ -39,7 +44,7 @@ def search_brewery():
     query = request.args.get('q')
     db = current_app.db_session
     res = db.query(RbBrewery).filter(RbBrewery.name.ilike('%' + query + '%'))
-    x = [brewery.serialize for brewery in res.limit(10).all()]
+    x = [brewery.serialize for brewery in res.limit(get_limit()).all()]
     return Response(json.dumps(x), content_type='application/json')
 
 
