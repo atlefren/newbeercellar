@@ -4,10 +4,11 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from newbeercellar.database import init_db
 from newbeercellar.models import (RbBeer, RbBrewery)
+from newbeercellar.settings import DATABASE_URL
 
 
 def get_database():
-    return init_db()
+    return init_db(DATABASE_URL)
 
 
 def get_rb_brewery(name, db_session):
