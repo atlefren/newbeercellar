@@ -60,7 +60,7 @@ var Cellar = this.Cellar || {};
         render: function () {
             var creator = null;
             var addClass = "btn btn-primary";
-            if (this.state.showCreate) {
+            if (this.state.showCreate && this.props.isEditable) {
                 creator = React.createElement(ns.BottleCreator, {
                             cellarId: this.props.cellarId, 
                             bottleAdded: this.bottleAdded, 
@@ -68,14 +68,19 @@ var Cellar = this.Cellar || {};
                 addClass += ' hidden';                        
             }
 
+            var createButton = null;
+            if (this.props.isEditable) {
+                createButton = React.createElement("button", {
+                                type: "button", 
+                                className: addClass, 
+                                onClick: this.toggleCreate}, "Add Bottle");
+            }
+
             return (
                 React.createElement("div", null, 
                     React.createElement("div", {className: "row"}, 
                         React.createElement("div", {className: "col-lg-7"}, 
-                            React.createElement("button", {
-                                type: "button", 
-                                className: addClass, 
-                                onClick: this.toggleCreate}, "Add Bottle")
+                            createButton
                         ), 
                         React.createElement("div", {className: "col-lg-2"}
                         ), 
@@ -93,9 +98,12 @@ var Cellar = this.Cellar || {};
         }
     });
 
-    ns.createList = function (cellarId, bottles) {
+    ns.createList = function (cellarId, bottles, isEditable) {
         React.render(
-          React.createElement(Cellar, {bottles: bottles, cellarId: cellarId}),
+          React.createElement(Cellar, {
+            bottles: bottles, 
+            cellarId: cellarId, 
+            isEditable: isEditable}),
           document.getElementById('beer_table')
         );
     };

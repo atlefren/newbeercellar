@@ -30,8 +30,12 @@ def user_owns_cellar(user_id, cellar_id):
         return False
 
 
+def get_cellar(cellar_id):
+    return current_app.db_session.query(Cellar).get(cellar_id)
+
+
 def get_cellar_data(cellar_id):
-    cellar = current_app.db_session.query(Cellar).get(cellar_id)
+    cellar = get_cellar(cellar_id)
     if cellar:
         return serialize_cellar(cellar)
     return None

@@ -31,6 +31,7 @@ class Cellar(Base):
     user = relationship('User', lazy=False)
     bottles = relationship("Bottle")
     is_default = Column(Boolean, default=False)
+    is_public = Column(Boolean, default=True)
 
     def __init__(self, name, user, is_default=False):
         self.name = name
