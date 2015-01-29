@@ -1,5 +1,6 @@
 from flask import current_app, redirect, url_for, session
-from flask.ext.login import login_user, logout_user, current_user
+from flask.ext.login import login_user, logout_user
+from flask_googlelogin import USERINFO_EMAIL_SCOPE
 
 from newbeercellar import login_manager, app, googlelogin
 from models import User
@@ -7,14 +8,18 @@ from models import User
 
 @app.route("/login")
 def login():
-    return redirect(googlelogin.login_url())
+    return redirect(
+        googlelogin.login_url(scopes=[USERINFO_EMAIL_SCOPE])
+    )
+
+
+login_manager.unauthorized_handler(login)
 
 
 @app.route('/logout')
 def logout():
     logout_user()
     session.clear()
-    print current_user.is_authenticated()
     return redirect(url_for('index'))
 
 
@@ -26,7 +31,6 @@ def load_user(userid):
 @app.route('/oauth2callback')
 @googlelogin.oauth2callback
 def create_or_update_user(token, userinfo, **params):
-
     if params.get('error', False):
         return redirect(url_for('index'))
 
@@ -36,13 +40,16 @@ def create_or_update_user(token, userinfo, **params):
         user.name = userinfo['name']
 
     else:
+
         user = User(
             google_id=userinfo['id'],
             name=userinfo['name'],
+            email=userinfo['email'],
+            username=userinfo['email'].split('@')[0].replace('.', '')
         )
 
     db.add(user)
     db.commit()
     db.flush()
     login_user(user)
-    return redirect(url_for('defaultcellar'))
+    return redirect(url_for('defaultcellar', username=user.username))

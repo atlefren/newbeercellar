@@ -3,7 +3,7 @@
 from flask import current_app
 from sqlalchemy.orm.exc import NoResultFound
 
-from models import Cellar
+from models import Cellar, User
 
 
 def serialize_cellar(cellar):
@@ -59,4 +59,16 @@ def get_or_create_default_cellar(user):
 def cellars_for_user(user_id):
     return current_app.db_session.query(Cellar).filter(
         Cellar.user_id == user_id
+    ).all()
+
+
+def get_user_by_username(username):
+    return current_app.db_session.query(User).filter(User.username == username).first()
+
+
+def public_cellars_for_username(username):
+    user = get_user_by_username(username)
+    return current_app.db_session.query(Cellar).filter(
+        Cellar.user_id == user.id,
+        Cellar.is_public == True
     ).all()

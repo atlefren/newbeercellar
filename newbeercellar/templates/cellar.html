@@ -13,7 +13,7 @@
         <div class="container-fluid">
             {% if is_owner %}
             <h1 class="edit-header">
-                <a title="Edit cellar" href="{{url_for('edit_cellar', cellar_id=cellar_id)}}">
+                <a title="Edit cellar" href="{{url_for('edit_cellar', cellar_id=cellar_id, username=current_user.username)}}">
                 {{cellar_name}} 
                     <small>
                         <span class="edit-btn glyphicon glyphicon-edit"></span>
@@ -21,7 +21,12 @@
                 </a>
             </h1>
             {% else %}
-            <h1>{{cellar_name}} </h1>
+            <h1>
+                {{cellar_name}}
+                {% if not is_owner %}
+                <small> ({{username}})</small>
+                {% endif %}
+            </h1>
             {% endif %}
             <div id="beer_table"></div>
         </div>

@@ -5,13 +5,16 @@
 {% block main %}
     {{ super() }}
     <div class="container">
-      
+        {% if username==current_user.username %}
+        <h2>My cellars</h2>
+        {% else %}
+        <h2>Public cellars for {{username}}</h2>
+        {% endif %}
         <div class="row">
             <div class="col-md-4">
-                <h2>My cellars</h2>
                 <div class="list-group">
                   {% for cellar in cellars %}                
-                    <a href="{{url_for('view_cellar', cellar_id=cellar.id)}}" class="list-group-item">{{cellar.name}}</a>
+                    <a href="{{url_for('view_cellar', username=username, cellar_id=cellar.id)}}" class="list-group-item">{{cellar.name}}</a>
                   {% endfor %}
                 </div>
             </div>

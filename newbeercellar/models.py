@@ -13,12 +13,16 @@ from database import Base
 class User(Base, UserMixin):
     __tablename__ = "users"
     id = Column('user_id', Integer, primary_key=True)
-    name = Column('name', String(20), unique=True, index=True)
+    name = Column('name', String(50), unique=False)
+    username = Column('username', String(50), unique=True)
+    email = Column('email', String(50), unique=True)
     google_id = Column('google_id', String(50), unique=True, index=True)
     registered_on = Column('registered_on', DateTime)
 
-    def __init__(self, name=None, google_id=None):
+    def __init__(self, name=None, google_id=None, email=None, username=None):
         self.name = name
+        self.username = username
+        self.email = email
         self.google_id = google_id
         self.registered_on = datetime.utcnow()
 

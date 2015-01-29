@@ -2,13 +2,14 @@
 
 import json
 
-from flask import render_template, abort
+from flask import render_template, abort, redirect, url_for
 from flask_login import login_required
 from flask.ext.login import current_user
 
 from newbeercellar import app
 from util import (get_or_create_default_cellar, cellars_for_user,
-                  get_cellar, serialize_cellar)
+                  get_cellar, serialize_cellar, get_user_by_username,
+                  public_cellars_for_username)
 from decorators import cellar_owner
 
 
@@ -16,21 +17,31 @@ from decorators import cellar_owner
 def index():
     if not current_user.is_authenticated():
         return render_template('index.html')
+    return redirect(url_for('cellar_list', username=current_user.username))
 
-    cellars = cellars_for_user(current_user.id)
+
+@app.route('/<string:username>/cellars/')
+def cellar_list(username):
+    user = get_user_by_username(username)
+    if user == current_user:
+        cellars = cellars_for_user(current_user.id)
+    else:
+        cellars = public_cellars_for_username(username)
     return render_template(
         'cellar_list.html',
-        cellars=cellars
+        cellars=cellars,
+        username=username
     )
 
 
-def return_cellar(cellar_data, is_owner):
+def return_cellar(cellar_data, is_owner, username):
     return render_template(
         'cellar.html',
         bottles=json.dumps(cellar_data['bottles']),
         cellar_name=cellar_data['cellarName'],
         cellar_id=cellar_data['cellarId'],
-        is_owner=is_owner
+        is_owner=is_owner,
+        username=username
     )
 
 
@@ -40,25 +51,29 @@ def owns_cellar(cellar):
     return cellar.user_id == current_user.id
 
 
-@app.route('/cellar/<int:cellar_id>')
-def view_cellar(cellar_id):
+@app.route('/<string:username>/cellars/<int:cellar_id>')
+def view_cellar(username, cellar_id):
     cellar = get_cellar(cellar_id)
     is_owner = owns_cellar(cellar)
     if cellar.is_public or is_owner:
-        return return_cellar(serialize_cellar(cellar), is_owner)
+        return return_cellar(serialize_cellar(cellar), is_owner, username)
     if not current_user.is_authenticated():
         abort(401)
     abort(403)
 
 
-@app.route('/cellar/<int:cellar_id>/edit')
+@app.route('/<string:username>/cellars/<int:cellar_id>/edit')
 @login_required
 @cellar_owner
-def edit_cellar(cellar_id):
+def edit_cellar(username, cellar_id):
     return "edit!"
 
 
-@app.route('/defaultcellar')
+@app.route('/<string:username>/defaultcellar')
 @login_required
-def defaultcellar():
-    return return_cellar(get_or_create_default_cellar(current_user), True)
+def defaultcellar(username):
+    return return_cellar(
+        get_or_create_default_cellar(current_user),
+        True,
+        username
+    )
