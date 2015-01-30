@@ -33,7 +33,6 @@
     {% endblock %}
 
     {% block js %}
-        {{ super() }}
         {% assets "js_cellar" %}
             <script type="text/javascript" src="{{ ASSET_URL }}"></script>
         {% endassets %}

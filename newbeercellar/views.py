@@ -66,7 +66,13 @@ def view_cellar(username, cellar_id):
 @login_required
 @cellar_owner
 def edit_cellar(username, cellar_id):
-    return "edit!"
+    return "edit cellar"
+
+
+@app.route('/profile')
+@login_required
+def edit_profile():
+    return "edit profile"
 
 
 @app.route('/<string:username>/defaultcellar')

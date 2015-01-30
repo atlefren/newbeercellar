@@ -1,7 +1,13 @@
 from flask.ext.assets import Bundle
 
-js_cellar = Bundle(
+js_base = Bundle(
     'js/lib/jquery/dist/jquery.js',
+    'js/lib/bootstrap/dist/js/bootstrap.min.js',
+    output='gen/js_base.js'
+)
+
+js_cellar = Bundle(
+    js_base,
     'js/lib/underscore/underscore-min.js',
     'js/lib/react/react.js',
     'js/lib/momentjs/min/moment.min.js',
