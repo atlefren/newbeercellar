@@ -14,14 +14,20 @@ Components
 
 Todos
 -----
-- User handling (login via Google?)
 - Edit bottle
-- better search
 - search in cellar(s)
 - create more cellars
+- edit cellar
+- edit profile
 - delete/drink bottle
 - fix setup routine!
 - add tags
+- statistics
+- bar code integration (crowdsourcing)
+- add new beers
+- import beers from vinmonopolet (name matching)
+- TESTS (python and js)
+- 
 
 Setup
 -----
