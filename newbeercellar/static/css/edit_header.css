@@ -1,0 +1,7 @@
+.edit-btn {
+    display: none;   
+}
+
+.edit-header:hover .edit-btn {
+    display: inline;
+}

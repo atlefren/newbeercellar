@@ -90,13 +90,13 @@ var Cellar = this.Cellar || {};
                             <td className="td-20">
                                 <ns.Autocomplete 
                                     placeholder="Brewery" 
-                                    url='/api/v1/search/brewery' 
+                                    url='/api/v1/search/brewery/' 
                                     select={this.selectBrewery} />
                               </td>
                               <td className="td-20">
                                 <ns.Autocomplete 
                                     placeholder="Beer" 
-                                    url='/api/v1/search/beer'
+                                    url='/api/v1/search/beer/'
                                     extraParams={beerSearchParams}
                                     select={this.selectBeer} />
                               </td>

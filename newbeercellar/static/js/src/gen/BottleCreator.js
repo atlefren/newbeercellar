@@ -90,13 +90,13 @@ var Cellar = this.Cellar || {};
                             React.createElement("td", {className: "td-20"}, 
                                 React.createElement(ns.Autocomplete, {
                                     placeholder: "Brewery", 
-                                    url: "/api/v1/search/brewery", 
+                                    url: "/api/v1/search/brewery/", 
                                     select: this.selectBrewery})
                               ), 
                               React.createElement("td", {className: "td-20"}, 
                                 React.createElement(ns.Autocomplete, {
                                     placeholder: "Beer", 
-                                    url: "/api/v1/search/beer", 
+                                    url: "/api/v1/search/beer/", 
                                     extraParams: beerSearchParams, 
                                     select: this.selectBeer})
                               ), 

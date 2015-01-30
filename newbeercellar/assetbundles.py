@@ -29,6 +29,7 @@ css_cellar = Bundle(
     'js/lib/bootstrap-datepicker/css/datepicker3.css',
     'css/clear-btn.css',
     'css/edit-btn.css',
+    'css/autocomplete.css',
     'css/table.css',
     filters=['cssrewrite'],
     output='gen/css_cellar.css'
