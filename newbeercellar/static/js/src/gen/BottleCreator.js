@@ -126,7 +126,7 @@ var Cellar = this.Cellar || {};
                                         type: "button", 
                                         disabled: disabled, 
                                         className: "btn btn-primary", 
-                                        onClick: this.save}, "Save"), 
+                                        onClick: this.save}, "Add"), 
                                     React.createElement("button", {
                                         type: "button", 
                                         className: "btn", 
