@@ -97,15 +97,19 @@ var Cellar = this.Cellar || {};
 
         //one of the children had a mouseover, highlight it and dehighlight others
         mouseOver: function (item) {
-            this.setState({selectedIdx: this.state.results.indexOf(item)});  
+            this.setState({selectedIdx: this.state.results.indexOf(item)});
         },
 
         onKeyDown: function (e) {
-            if (e.which === 13) { //enter
-                this.selectItem(this.state.results[this.state.selectedIdx]);
+            console.log(e.which);
+            if (e.which === 13 || e.which === 9) { //enter or tab
+                var item = this.state.results[this.state.selectedIdx];
+                if (item) {
+                    this.selectItem(item);
+                }
             } else if (e.which === 40) { //down
                 this.changeSelectedIdx(1);
-            } else if (e.which === 38) { //up                
+            } else if (e.which === 38) { //up
                 this.changeSelectedIdx(-1);
             }
         },
@@ -124,11 +128,11 @@ var Cellar = this.Cellar || {};
                 itemNodes = _.map(this.state.results, function (item, key) {
                     var selected = this.state.selectedIdx === key;
                     return (
-                        <AutocompleteItem 
+                        <AutocompleteItem
                             key={item.id}
                             item={item}
                             selected={selected}
-                            mouseOver={this.mouseOver}                            
+                            mouseOver={this.mouseOver}
                             selectItem={this.selectItem}/>
                     );
                 }, this);    
@@ -143,8 +147,8 @@ var Cellar = this.Cellar || {};
                         className={inputClass}
                         onKeyDown={this.onKeyDown}
                         onChange={this.search} />
-                    <ul 
-                        className="dropdown-menu autocomplete-results" 
+                    <ul
+                        className="dropdown-menu autocomplete-results"
                         style={resultsStyle}>
                         {itemNodes}
                     </ul>

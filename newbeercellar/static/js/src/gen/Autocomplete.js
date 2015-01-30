@@ -97,15 +97,19 @@ var Cellar = this.Cellar || {};
 
         //one of the children had a mouseover, highlight it and dehighlight others
         mouseOver: function (item) {
-            this.setState({selectedIdx: this.state.results.indexOf(item)});  
+            this.setState({selectedIdx: this.state.results.indexOf(item)});
         },
 
         onKeyDown: function (e) {
-            if (e.which === 13) { //enter
-                this.selectItem(this.state.results[this.state.selectedIdx]);
+            console.log(e.which);
+            if (e.which === 13 || e.which === 9) { //enter or tab
+                var item = this.state.results[this.state.selectedIdx];
+                if (item) {
+                    this.selectItem(item);
+                }
             } else if (e.which === 40) { //down
                 this.changeSelectedIdx(1);
-            } else if (e.which === 38) { //up                
+            } else if (e.which === 38) { //up
                 this.changeSelectedIdx(-1);
             }
         },
