@@ -84,13 +84,13 @@ var Cellar = this.Cellar || {};
             var beerSearchParams = {brewery: this.state.breweryId};
             var disabled = !(this.state.beerId && this.state.breweryId);        
             return (
-                <table className="table">
+                <table className="table borderless">
                     <tbody>
                         <tr>
                             <td className="td-20">
                                 <ns.Autocomplete 
                                     placeholder="Brewery" 
-                                    url='/api/v1/search/brewery/' 
+                                    url='/api/v1/search/brewery/'
                                     select={this.selectBrewery} />
                               </td>
                               <td className="td-20">
@@ -101,7 +101,7 @@ var Cellar = this.Cellar || {};
                                     select={this.selectBeer} />
                               </td>
                               <td className="td-10">
-                                <input type="text" ref="batch" className="form-control" placeholder="bath #"/>
+                                <input type="text" ref="batch" className="form-control" placeholder="batch #"/>
                               </td>
                               <td  className="td-10">
                                 <DatePicker ref="brewdate" placeholder="brew date"/>
@@ -121,15 +121,17 @@ var Cellar = this.Cellar || {};
                         </tr>
                         <tr colSpan="8">
                             <td>
-                                <button 
-                                    type="button" 
-                                    disabled={disabled}
-                                    className="btn btn-primary" 
-                                    onClick={this.save}>Save</button>
-                                <button 
-                                    type="button" 
-                                    className="btn" 
-                                    onClick={this.cancel}>Cancel</button>
+                                <div className="btn-toolbar">
+                                    <button 
+                                        type="button" 
+                                        disabled={disabled}
+                                        className="btn btn-primary" 
+                                        onClick={this.save}>Save</button>
+                                    <button 
+                                        type="button" 
+                                        className="btn" 
+                                        onClick={this.cancel}>Cancel</button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>

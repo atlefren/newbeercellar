@@ -7,3 +7,7 @@
 .td-5 {
     width: 5%;
 }
+
+.borderless tbody tr td, .borderless thead tr th {
+    border-top: none;
+}

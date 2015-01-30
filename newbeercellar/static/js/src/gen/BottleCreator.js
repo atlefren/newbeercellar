@@ -84,7 +84,7 @@ var Cellar = this.Cellar || {};
             var beerSearchParams = {brewery: this.state.breweryId};
             var disabled = !(this.state.beerId && this.state.breweryId);        
             return (
-                React.createElement("table", {className: "table"}, 
+                React.createElement("table", {className: "table borderless"}, 
                     React.createElement("tbody", null, 
                         React.createElement("tr", null, 
                             React.createElement("td", {className: "td-20"}, 
@@ -101,7 +101,7 @@ var Cellar = this.Cellar || {};
                                     select: this.selectBeer})
                               ), 
                               React.createElement("td", {className: "td-10"}, 
-                                React.createElement("input", {type: "text", ref: "batch", className: "form-control", placeholder: "bath #"})
+                                React.createElement("input", {type: "text", ref: "batch", className: "form-control", placeholder: "batch #"})
                               ), 
                               React.createElement("td", {className: "td-10"}, 
                                 React.createElement(DatePicker, {ref: "brewdate", placeholder: "brew date"})
@@ -121,15 +121,17 @@ var Cellar = this.Cellar || {};
                         ), 
                         React.createElement("tr", {colSpan: "8"}, 
                             React.createElement("td", null, 
-                                React.createElement("button", {
-                                    type: "button", 
-                                    disabled: disabled, 
-                                    className: "btn btn-primary", 
-                                    onClick: this.save}, "Save"), 
-                                React.createElement("button", {
-                                    type: "button", 
-                                    className: "btn", 
-                                    onClick: this.cancel}, "Cancel")
+                                React.createElement("div", {className: "btn-toolbar"}, 
+                                    React.createElement("button", {
+                                        type: "button", 
+                                        disabled: disabled, 
+                                        className: "btn btn-primary", 
+                                        onClick: this.save}, "Save"), 
+                                    React.createElement("button", {
+                                        type: "button", 
+                                        className: "btn", 
+                                        onClick: this.cancel}, "Cancel")
+                                )
                             )
                         )
                     )
