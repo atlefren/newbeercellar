@@ -101,7 +101,6 @@ var Cellar = this.Cellar || {};
         },
 
         onKeyDown: function (e) {
-            console.log(e.which);
             if (e.which === 13 || e.which === 9) { //enter or tab
                 var item = this.state.results[this.state.selectedIdx];
                 if (item) {
