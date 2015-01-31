@@ -36,4 +36,3 @@ from newbeercellar import views
 from newbeercellar import api
 
 app.db_session = db.session
-db.create_all()
