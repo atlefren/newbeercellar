@@ -2,3 +2,8 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
+
+.beercellar-header {
+    background-image: url('../img/header.jpg');
+    background-repeat: no-repeat;
+}
