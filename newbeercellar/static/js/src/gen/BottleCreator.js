@@ -19,6 +19,18 @@ var Cellar = this.Cellar || {};
     }
 
 
+    function getAutocompleteSearch(url) {
+        return function (data, onSuccess, onError) {
+            $.ajax({
+                url: url,
+                data: data,
+                success: onSuccess,
+                dataType: 'json'
+            });
+        }
+    }
+
+
     var DatePicker = React.createClass({displayName: "DatePicker",
 
         componentDidMount: function() {
@@ -90,13 +102,13 @@ var Cellar = this.Cellar || {};
                             React.createElement("td", {className: "td-20"}, 
                                 React.createElement(ns.Autocomplete, {
                                     placeholder: "Brewery", 
-                                    url: "/api/v1/search/brewery/", 
+                                    autocompleteSearch: getAutocompleteSearch('/api/v1/search/brewery/'), 
                                     select: this.selectBrewery})
                               ), 
                               React.createElement("td", {className: "td-20"}, 
                                 React.createElement(ns.Autocomplete, {
                                     placeholder: "Beer", 
-                                    url: "/api/v1/search/beer/", 
+                                    autocompleteSearch: getAutocompleteSearch('/api/v1/search/beer/'), 
                                     extraParams: beerSearchParams, 
                                     select: this.selectBeer})
                               ), 

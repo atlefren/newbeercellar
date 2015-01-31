@@ -58,12 +58,10 @@ var Cellar = this.Cellar || {};
             //only trigger a search if we have a search value
             if (val !== this.state.searchVal && val !== '') {
                 this.setState({searchVal: val});
-                $.ajax({
-                    url: this.props.url,
-                    data: _.extend({q: val}, this.props.extraParams),
-                    success: this.showResults,
-                    dataType: 'json'
-                });
+                this.props.autocompleteSearch(
+                    _.extend({q: val}, this.props.extraParams),
+                    this.showResults
+                );
             }
             if (val === '') {
                 this.showResults([]);
