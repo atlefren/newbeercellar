@@ -57,17 +57,21 @@ Setup
 
 7. copy newbeercellar/settings.py_template to newbeercellar/settings.py and fill in data
 
-8. Import ratebeer data
+8. run database-migrations
     
-    python read_rb.py
+    python manage.py db upgrade
 
-9. set up jsx-build
+9. Import ratebeer data
+    
+    python manage.py loaddata
+
+10. set up jsx-build
     
      jsx --watch static/js/src/ static/js/src/gen/ -x jsx
 
-10. Run the app
+11. Run the app
     
     python runapp.py
 
-11. Tell @atlefren that this is stupid, use some tool to simplify this!
+12. Tell @atlefren that this is stupid, use some tool to simplify this!
 

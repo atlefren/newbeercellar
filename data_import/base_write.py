@@ -2,13 +2,13 @@
 
 from sqlalchemy.orm.exc import NoResultFound
 
-from newbeercellar.database import init_db
+#from newbeercellar.database import init_db
 from newbeercellar.models import (RbBeer, RbBrewery)
-from newbeercellar.settings import SQLALCHEMY_DATABASE_URI
+#from newbeercellar.settings import SQLALCHEMY_DATABASE_URI
 
 
-def get_database():
-    return init_db(SQLALCHEMY_DATABASE_URI)
+#def get_database():
+#    return init_db(SQLALCHEMY_DATABASE_URI)
 
 
 def get_rb_brewery(name, db_session):
@@ -33,19 +33,19 @@ def create_or_update_rb_beer(db_session, ratebeer_id, name,
     db_session.add(beer)
 
 
-def write_rb_data(breweries):
-    db_session, db_metadata, db_engine = get_database()
+def write_rb_data(breweries, db):
+    # db_session, db_metadata, db_engine = get_database()
     for brewery_name in breweries.keys():
         brewery = RbBrewery(brewery_name)
-        db_session.add(brewery)
-    db_session.commit()
+        db.session.add(brewery)
+    db.session.commit()
 
     counter = 0
     for brewery_name, beers in breweries.items():
-        brewery = get_rb_brewery(brewery_name, db_session)
+        brewery = get_rb_brewery(brewery_name, db.session)
         for beer in beers:
             create_or_update_rb_beer(
-                db_session,
+                db.session,
                 beer["id"],
                 beer["name"],
                 beer["short_name"],
@@ -56,4 +56,4 @@ def write_rb_data(breweries):
             counter += 1
             if counter % 1000 == 0:
                 print counter
-    db_session.commit()
+    db.session.commit()

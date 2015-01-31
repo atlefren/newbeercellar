@@ -55,7 +55,7 @@ def get_file():
         return filename
 
 
-if __name__ == '__main__':
+def update_rb_data(db):
     filename = get_file()
     data, errors = read_ratebeer_file(filename)
-    write_rb_data(data)
+    write_rb_data(data, db)
