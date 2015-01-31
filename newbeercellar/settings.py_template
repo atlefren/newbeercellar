@@ -8,4 +8,4 @@ SECRET_KEY = ''
 
 DEBUG = True
 
-DATABASE_URL = 'postgresql://user:pass@host:port/basename'
+SQLALCHEMY_DATABASE_URI = 'postgresql://user:pass@host:port/basename'

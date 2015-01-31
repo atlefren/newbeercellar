@@ -7,10 +7,12 @@ from sqlalchemy.orm import relationship
 
 from flask_login import UserMixin
 
-from database import Base
+#from database import Base
+
+from newbeercellar import db
 
 
-class User(Base, UserMixin):
+class User(db.Model, UserMixin):
     __tablename__ = "users"
     id = Column('user_id', Integer, primary_key=True)
     name = Column('name', String(50), unique=False)
@@ -27,7 +29,7 @@ class User(Base, UserMixin):
         self.registered_on = datetime.utcnow()
 
 
-class Cellar(Base):
+class Cellar(db.Model):
     __tablename__ = 'cellars'
     id = Column(Integer, primary_key=True)
     name = Column(String)
@@ -53,7 +55,7 @@ def parse_date(date):
     return date
 
 
-class Bottle(Base):
+class Bottle(db.Model):
     __tablename__ = 'bottles'
 
     id = Column(Integer, primary_key=True)
@@ -101,7 +103,7 @@ class Bottle(Base):
         }
 
 
-class RbBrewery(Base):
+class RbBrewery(db.Model):
     __tablename__ = 'rb_breweries'
 
     id = Column(Integer, primary_key=True)
@@ -120,7 +122,7 @@ class RbBrewery(Base):
         }
 
 
-class RbBeer(Base):
+class RbBeer(db.Model):
     __tablename__ = 'rb_beers'
 
     id = Column(Integer, primary_key=True)

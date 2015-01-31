@@ -5,12 +5,14 @@ from webassets.loaders import PythonLoader
 from flask.ext.assets import Environment
 from flask_googlelogin import GoogleLogin
 from flask_login import LoginManager
+from flask.ext.sqlalchemy import SQLAlchemy
 
-from database import init_db
+# from database import init_db
 
 # load config
 app = Flask(__name__)
 
+db = SQLAlchemy(app)
 
 # load config
 app.config.from_object('newbeercellar.settings')
@@ -33,7 +35,5 @@ from newbeercellar import login
 from newbeercellar import views
 from newbeercellar import api
 
-# init the database
-(app.db_session, app.db_metadata, app.db_engine) = init_db(
-    app.config['DATABASE_URL']
-)
+app.db_session = db.session
+db.create_all()
