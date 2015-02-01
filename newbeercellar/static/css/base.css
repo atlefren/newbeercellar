@@ -1,0 +1,11 @@
+
+html {
+    min-height: 100%;
+}
+
+body.beercellar {
+    
+    background-image: url('../img/bottles.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}

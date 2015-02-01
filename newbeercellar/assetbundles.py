@@ -47,6 +47,7 @@ js_cellar = Bundle(
 css_base = Bundle(
     'js/lib/bootstrap/dist/css/bootstrap.min.css',
     Bundle(
+        'css/base.css',
         'css/header.css',
         filters=css_filters
     ),
