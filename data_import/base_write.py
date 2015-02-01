@@ -35,11 +35,13 @@ def create_or_update_rb_beer(db_session, ratebeer_id, name,
 
 def write_rb_data(breweries, db):
     # db_session, db_metadata, db_engine = get_database()
+    print "Adding %d breweries." % len(breweries)
     for brewery_name in breweries.keys():
         brewery = RbBrewery(brewery_name)
         db.session.add(brewery)
     db.session.commit()
 
+    print "Importing beers."
     counter = 0
     for brewery_name, beers in breweries.items():
         brewery = get_rb_brewery(brewery_name, db.session)
@@ -57,3 +59,4 @@ def write_rb_data(breweries, db):
             if counter % 1000 == 0:
                 print counter
     db.session.commit()
+    print "Import complete."

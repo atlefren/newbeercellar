@@ -13,7 +13,7 @@ manager.add_command('db', MigrateCommand)
 
 @manager.command
 def loaddata():
-    print "import"
+    print "Importing data from ratebeer.com"
     update_rb_data(db)
 
 
