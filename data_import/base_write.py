@@ -58,5 +58,7 @@ def write_rb_data(breweries, db):
             counter += 1
             if counter % 1000 == 0:
                 print counter
+                db.session.commit()
+
     db.session.commit()
     print "Import complete."
