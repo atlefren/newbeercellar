@@ -1,0 +1,140 @@
+---
+- hosts: development
+  sudo: yes
+  vars:
+    database:
+        name: beer
+        username: beer
+        password: beer
+  tasks:
+
+  - name: noe
+    apt: pkg=language-pack-nb state=latest
+
+  #- name: ensure apt cache is up to date
+  #  apt: update_cache=yes
+
+  - name: ensure packages are installed
+    apt: name={{item}}
+    with_items:
+        - postgresql-9.3
+        - python-psycopg2
+        - postgresql-contrib
+    environment:
+      LC_ALL: en_US.UTF-8
+
+  - name: create postgresql databases
+    sudo: yes
+    sudo_user: postgres
+    postgresql_db: name={{ database.name }} encoding='UTF-8'
+
+  - name: create postgresql users
+    sudo: yes
+    sudo_user: postgres
+    postgresql_user: name={{ database.username }}
+                     password={{ database.password }}
+                     db={{ database.name }}
+                     role_attr_flags=NOCREATEROLE,NOSUPERUSER,NOCREATEDB
+
+  - name: restart postgres
+    service: name=postgresql state=restarted
+
+  - name: install nginx
+    apt: pkg=nginx state=latest
+
+  - name: copy nginx sites
+    template: src=nginx.j2
+              dest=/etc/nginx/sites-available/beercellar
+              owner=root
+              group=root
+              mode=0644
+    notify:
+      - restart nginx
+
+  - name: enable nginx sites
+    file: src=/etc/nginx/sites-available/beercellar
+          dest=/etc/nginx/sites-enabled/beercellar
+          owner=root
+          group=root
+          state=link
+    notify:
+      - restart nginx
+
+  - name: disable default site
+    file: path=/etc/nginx/sites-enabled/default
+          state=absent
+    notify:
+      - restart nginx
+
+  - name: make sure nginx is running
+    service: name=nginx state=running enabled=yes
+
+  - name: install heroku toolbelt
+    shell: wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+           creates=/usr/local/heroku
+
+  - name: install packages
+    apt: pkg={{ item }} state=latest update_cache=no
+    with_items:
+      - python-dev        
+      - libffi-dev
+      - python-pip
+      - libpq-dev
+      - libxml2
+      - libxml2-dev
+      - libxslt1-dev
+      - python-virtualenv
+      - virtualenvwrapper
+      - nodejs
+      - npm
+
+  - name: Create symlink for nodejs
+    file: src=/usr/bin/nodejs dest=/usr/bin/node state=link
+
+  - name: install pip requirements
+    pip: requirements=/vagrant/requirements.txt virtualenv=/vagrant/venv      
+
+  - name: install global npm packages
+    npm: name={{ item }} global=yes state=present
+    with_items:
+      - bower
+      - react-tools
+
+  - name: install bower packages
+    command: bower install chdir=/vagrant
+    sudo: false
+
+  - name: hide login message
+    copy: dest=/home/vagrant/.hushlogin
+          content=
+          owner=vagrant
+          group=vagrant
+          mode=0644
+
+  - name: install bash_profile
+    copy: src=dot.bash_profile
+          dest=/home/vagrant/.bash_profile
+          owner=vagrant
+          group=vagrant
+          mode=0644
+
+  - name: create .env file for foreman
+    # Since /vagrant is mounted over NFS, we don't know the exact uid and gid
+    # of the actual user on the host machine. Need to use sudo_user
+    sudo_user: vagrant
+    template: src=dot.env.j2
+              dest=/vagrant/.env
+              mode=0600
+
+  - name: create settings.py for project
+    sudo_user: vagrant
+    template: src=settings.py.j2
+              dest=/vagrant/newbeercellar/settings.py
+              mode=0600
+
+  - name: run migrations
+    command: /vagrant/venv/bin/python /vagrant/manage.py db upgrade chdir=/vagrant
+
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted enabled=yes

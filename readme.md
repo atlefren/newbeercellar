@@ -20,7 +20,8 @@ Todos
 - edit cellar
 - edit profile
 - delete/drink bottle
-- fix setup routine!
+- fix ansible playbook to work for non-vagrant
+- fix memory usage of import script
 - add tags
 - statistics
 - bar code integration (crowdsourcing)
@@ -32,46 +33,31 @@ Todos
 Setup
 -----
 
-1. Install bower and react-tools
+0. Install ansible and vagrant
+
+1. go to https://console.developers.google.com/project, create a new project, go to Credentials and "create new CLient id". Choose web application, and enter http://localhost:9080/oauth2callback as redirect uri
+
+2. copy provisioning/settings.py.j2_example to provisioning/settings.py.j2, and fill in GOOGLE_LOGIN_CLIENT_ID, GOOGLE_LOGIN_CLIENT_SECRET and SECRET_KEY
+
+3. run vagrant up dev
+
+4. run vagrant ssh dev
+
+5. run python manage.py loaddata to load data
+
+6. run foreman start to launch app
+
+7. app is now available at localhost:8090
+
+
+Access db
+---------
+1. vagrant ssh
+2. sudo su - postgres
+3. psql -d beer
+
+
+Set up jsx-build
+----------------
     
-    npm install -g react-tools
-    npm install -g bower
-
-2. Setup a python virtualenv
-    
-    virtualenv venv
-
-3. Activate virtualenv
-
-    venv/bin/activate
-
-4. install python requirements
-    
-    pip install -r requirements.txt
-
-5. install js requirements
-
-    bower install
-
-6. Setup a postgre-database 
-
-7. copy newbeercellar/settings.py_template to newbeercellar/settings.py and fill in data
-
-8. run database-migrations
-    
-    python manage.py db upgrade
-
-9. Import ratebeer data
-    
-    python manage.py loaddata
-
-10. set up jsx-build
-    
-     jsx --watch static/js/src/ static/js/src/gen/ -x jsx
-
-11. Run the app
-    
-    python runapp.py
-
-12. Tell @atlefren that this is stupid, use some tool to simplify this!
-
+    jsx --watch static/js/src/ static/js/src/gen/ -x jsx

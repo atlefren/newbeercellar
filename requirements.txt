@@ -13,6 +13,7 @@ SQLAlchemy==0.9.8
 Werkzeug==0.9.6
 alembic==0.7.4
 argparse==1.2.1
+gunicorn==19.2.0
 itsdangerous==0.24
 oauthlib==0.7.2
 psycopg2==2.5.4
