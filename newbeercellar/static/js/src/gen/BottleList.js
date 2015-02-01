@@ -17,7 +17,9 @@ var Cellar = this.Cellar || {};
                         this.props.bottle.breweryName
                     ), 
                     React.createElement("td", {className: "td-20"}, 
-                        this.props.bottle.beerName
+                        React.createElement("a", {href: this.props.bottle.ratebeerUrl}, 
+                            this.props.bottle.beerName
+                        )
                     ), 
                     React.createElement("td", {className: "td-10"}, 
                         this.props.bottle.batchNo

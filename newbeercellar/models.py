@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-
 from datetime import datetime
+import re
+
 from sqlalchemy import (Column, Integer, String, Numeric, ForeignKey, Text,
                         Date, DateTime, Boolean)
 from sqlalchemy.orm import relationship
-
 from flask_login import UserMixin
 
-#from database import Base
-
 from newbeercellar import db
+
+
+RATEBEER_BASE_URL = "http://www.ratebeer.com/beer"
 
 
 class User(db.Model, UserMixin):
@@ -99,7 +100,8 @@ class Bottle(db.Model):
             "amount": self.amount,
             "comment": self.comment,
             "added": iso_or_none(self.date_added),
-            "removed": iso_or_none(self.date_removed)
+            "removed": iso_or_none(self.date_removed),
+            'ratebeerUrl': self.beer.ratebeer_url,
         }
 
 
@@ -118,7 +120,7 @@ class RbBrewery(db.Model):
     def serialize(self):
         return {
             'id': self.id,
-            'name': self.name
+            'name': self.name,
         }
 
 
@@ -148,5 +150,14 @@ class RbBeer(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'brewery': self.brewery.name
+            'brewery': self.brewery.name,
         }
+
+    @property
+    def ratebeer_url(self):
+        fixed_name = re.sub(
+            '[^A-Za-z0-9\-]+',
+            '',
+            self.short_name.replace(' ', '-')
+        )
+        return "%s/%s/%s/" % (RATEBEER_BASE_URL, fixed_name, self.ratebeer_id)
