@@ -1,13 +1,21 @@
 .td-20 {
     width: 20%;
 }
+.td-17 {
+    width: 17%;
+}
 .td-10 {
     width: 10%;
 }
-.td-5 {
-    width: 5%;
+.td-3 {
+    width: 3%;
 }
 
 .borderless tbody tr td, .borderless thead tr th {
     border-top: none;
+}
+
+.table-tool {
+    margin-right: 4px;
+    color: #333;
 }

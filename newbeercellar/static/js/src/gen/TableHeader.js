@@ -54,6 +54,7 @@ var Cellar = this.Cellar || {};
         render: function () {
 
             var columns = {
+                util: {name: '', sort: null},
                 breweryName: {name: "Brewery", sort: "alph"},
                 beerName: {name: "Beer", sort: "alph"},
                 batchNo: {name: "Batch #", sort: "alph"},
