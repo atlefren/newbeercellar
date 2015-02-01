@@ -8,3 +8,4 @@ newbeercellar/settings.py
 .vagrant/
 provisioning/settings.py.j2
 .env
+venv/
