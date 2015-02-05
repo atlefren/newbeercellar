@@ -35,9 +35,9 @@ var Cellar = this.Cellar || {};
                     sortOrder = "▲"
                 }
             }
-            var className;
+            var className = this.props.className;
             if (this.props.sortType) {
-                className ='sortable';
+                className += ' sortable';
             }
             return (
                 React.createElement("th", {
@@ -60,23 +60,19 @@ var Cellar = this.Cellar || {};
         },
 
         render: function () {
-
-            var columns = {
-                util: {name: '', sort: null},
-                breweryName: {name: "Brewery", sort: "alph"},
-                beerName: {name: "Beer", sort: "alph"},
-                batchNo: {name: "Batch #", sort: "alph"},
-                brewDate: {name: "Brew date", sort: "date"},
-                bbfDate: {name: "Best before date", sort: "date"},
-                size: {name: "Size", sort: "num"},
-                amount: {name: "Amount", sort: "num"},
-                comment: {name: "Comment", sort: null}
-            };
-
-            var headings = _.map(columns, function (data, key) {
+            var elements = _.clone(ns.listElements);
+            elements.unshift({
+                property: 'util',
+                name: '',
+                sort: null,
+                className: 'td-3'
+            });
+            var headings = _.map(elements, function (data) {
+                var key = data.property;
                 var sorted = this.state.sortOn === key;
                 return (
                     React.createElement(Header, {
+                        className: data.className, 
                         sorted: sorted, 
                         sortType: data.sort, 
                         text: data.name, 

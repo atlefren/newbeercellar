@@ -7,16 +7,15 @@ var Cellar = this.Cellar || {};
         return (React.createElement("a", {href: bottle.ratebeerUrl}, text));
     }
 
-
     ns.listElements = [
-        {property: 'breweryName', className: 'td-20', editable: false},
-        {property: 'beerName', className: 'td-20', wrap: wrapRatebeerLink, editable: false},
-        {property: 'batchNo', className: 'td-10', editable: true, type: 'string'},
-        {property: 'brewDate', className: 'td-10', editable: true, type: 'date'},
-        {property: 'bbfDate', className: 'td-10', editable: true, type: 'date'},
-        {property: 'size', className: 'td-5', editable: true, type: 'string'},
-        {property: 'amount', className: 'td-5', editable: true, type: 'int'},
-        {property: 'comment', className: 'td-17', editable: true, type: 'text'}
+        {name: "Brewery", sort: "alph", property: 'breweryName', className: 'td-20', editable: false},
+        {name: "Beer", sort: "alph", property: 'beerName', className: 'td-20', wrap: wrapRatebeerLink, editable: false},
+        {name: "Batch #", sort: "alph", property: 'batchNo', className: 'td-10', editable: true, type: 'string'},
+        {name: "Brew date", sort: "date", property: 'brewDate', className: 'td-10', editable: true, type: 'date'},
+        {name: "Best before date", sort: "date", property: 'bbfDate', className: 'td-10', editable: true, type: 'date'},
+        {name: "Size", sort: "num", property: 'size', className: 'td-5', editable: true, type: 'string'},
+        {name: "Amount", sort: "num", property: 'amount', className: 'td-5', editable: true, type: 'int'},
+        {name: "Comment", sort: null, property: 'comment', className: 'td-17', editable: true, type: 'text'}
     ];
 
 
