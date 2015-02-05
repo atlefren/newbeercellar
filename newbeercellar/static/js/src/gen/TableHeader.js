@@ -19,9 +19,11 @@ var Cellar = this.Cellar || {};
         },
 
         click: function () {
-            var sortOrder = sorts[getNextSort(this.state.sortOrder)];
-            this.setState({sortOrder: sortOrder});
-            this.props.sortBy(this.props.key2, this.props.sortType, sortOrder);
+            if (this.props.sortType) {
+                var sortOrder = sorts[getNextSort(this.state.sortOrder)];
+                this.setState({sortOrder: sortOrder});
+                this.props.sortBy(this.props.key2, this.props.sortType, sortOrder);
+            }
         },
 
         render: function () {
@@ -33,8 +35,14 @@ var Cellar = this.Cellar || {};
                     sortOrder = "▲"
                 }
             }
+            var className;
+            if (this.props.sortType) {
+                className ='sortable';
+            }
             return (
-                React.createElement("th", {onClick: this.click}, this.props.text, " ", sortOrder)
+                React.createElement("th", {
+                    className: className, 
+                    onClick: this.click}, this.props.text, " ", sortOrder)
             );
         }
     });
@@ -62,7 +70,7 @@ var Cellar = this.Cellar || {};
                 bbfDate: {name: "Best before date", sort: "date"},
                 size: {name: "Size", sort: "num"},
                 amount: {name: "Amount", sort: "num"},
-                comment: {name: "Comment", sort: "alph"}
+                comment: {name: "Comment", sort: null}
             };
 
             var headings = _.map(columns, function (data, key) {

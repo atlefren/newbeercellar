@@ -7,3 +7,7 @@ body {
     background-image: url('../img/header_fade.png');
     background-repeat: no-repeat;
 }
+
+.sortable {
+    cursor: pointer;
+}
