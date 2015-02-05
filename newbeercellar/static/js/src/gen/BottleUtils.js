@@ -16,7 +16,7 @@ var Cellar = this.Cellar || {};
         {name: "Batch #", sort: "alph", property: 'batchNo', className: 'td-10', editable: true, type: 'string'},
         {name: "Brew date", sort: "date", property: 'brewDate', className: 'td-10', editable: true, type: 'date'},
         {name: "Best before date", sort: "date", property: 'bbfDate', className: 'td-10', editable: true, type: 'date'},
-        {name: "Size", sort: "num", property: 'size', className: 'td-5', editable: true, type: 'string'},
+        {name: "Size (cl)", sort: "num", property: 'size', className: 'td-5', editable: true, type: 'string'},
         {name: "Amount", sort: "num", property: 'amount', className: 'td-5', editable: true, type: 'int'},
         {name: "Comment", sort: null, property: 'comment', className: 'td-17', editable: true, type: 'text'}
     ];
