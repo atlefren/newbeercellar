@@ -76,13 +76,15 @@ def save_bottle(cellar_id):
 @app.route(api_prefix + '/bottle/<int:bottle_id>/', methods=['PUT', 'DELETE'])
 @login_required
 def edit_bottle(bottle_id):
+    db = current_app.db_session
+    bottle = db.query(Bottle).get(bottle_id)
+
     if request.method == 'DELETE':
+        db.delete(bottle)
+        db.commit()
         return Response(status=204)
 
     data = request.json
-
-    db = current_app.db_session
-    bottle = db.query(Bottle).get(bottle_id)
 
     bottle.update(data)
     db.add(bottle)
