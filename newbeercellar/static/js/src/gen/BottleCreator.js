@@ -31,23 +31,6 @@ var Cellar = this.Cellar || {};
     }
 
 
-    var DatePicker = React.createClass({displayName: "DatePicker",
-
-        componentDidMount: function() {
-            $(this.getDOMNode()).datepicker({
-                format: 'dd.mm.yyyy'
-            });
-        },
-
-        render: function () {
-            return (
-                React.createElement("input", {
-                    placeholder: "dd.mm.yyyy", 
-                    className: "form-control"})
-            );
-        }
-    });
-
     ns.BottleCreator = React.createClass({displayName: "BottleCreator",
 
         getInitialState: function() {
@@ -116,10 +99,10 @@ var Cellar = this.Cellar || {};
                                 React.createElement("input", {type: "text", ref: "batch", className: "form-control", placeholder: "batch #"})
                               ), 
                               React.createElement("td", {className: "td-10"}, 
-                                React.createElement(DatePicker, {ref: "brewdate", placeholder: "brew date"})
+                                React.createElement(ns.DatePicker, {ref: "brewdate", placeholder: "brew date"})
                               ), 
                               React.createElement("td", {className: "td-10"}, 
-                                React.createElement(DatePicker, {ref: "bbfdate", placeholder: "best before date"})
+                                React.createElement(ns.DatePicker, {ref: "bbfdate", placeholder: "best before date"})
                               ), 
                               React.createElement("td", {className: "td-5"}, 
                                 React.createElement("input", {type: "date", ref: "size", className: "form-control", placeholder: "size (cl)"})

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import json
+import simplejson as json
 
 from flask import render_template, abort, redirect, url_for
 from flask_login import login_required

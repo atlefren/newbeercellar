@@ -31,23 +31,6 @@ var Cellar = this.Cellar || {};
     }
 
 
-    var DatePicker = React.createClass({
-
-        componentDidMount: function() {
-            $(this.getDOMNode()).datepicker({
-                format: 'dd.mm.yyyy'
-            });
-        },
-
-        render: function () {
-            return (
-                <input 
-                    placeholder="dd.mm.yyyy"
-                    className="form-control" />
-            );
-        }
-    });
-
     ns.BottleCreator = React.createClass({
 
         getInitialState: function() {
@@ -116,10 +99,10 @@ var Cellar = this.Cellar || {};
                                 <input type="text" ref="batch" className="form-control" placeholder="batch #"/>
                               </td>
                               <td  className="td-10">
-                                <DatePicker ref="brewdate" placeholder="brew date"/>
+                                <ns.DatePicker ref="brewdate" placeholder="brew date"/>
                               </td>
                               <td  className="td-10">
-                                <DatePicker ref="bbfdate" placeholder="best before date"/>                            
+                                <ns.DatePicker ref="bbfdate" placeholder="best before date"/>
                               </td>
                               <td  className="td-5"> 
                                 <input type="date" ref="size" className="form-control" placeholder="size (cl)"/>

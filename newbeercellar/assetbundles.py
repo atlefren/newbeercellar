@@ -32,6 +32,11 @@ js_cellar = Bundle(
     Bundle(
         'js/src/Util.js',
         'js/lib/bootstrap-datepicker/js/bootstrap-datepicker.js',
+        'js/src/gen/DatePicker.js',
+        'js/src/gen/SaveBtn.js',
+        'js/src/gen/BottleUtils.js',
+        'js/src/gen/BottleTools.js',
+        'js/src/gen/BottleElement.js',
         'js/src/gen/SearchHeader.js',
         'js/src/gen/QuickFilter.js',
         'js/src/gen/Autocomplete.js',

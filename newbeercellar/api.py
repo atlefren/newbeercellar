@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import json
+import simplejson as json
 
 from flask import request, Response, current_app
 from flask.ext.login import current_user
@@ -70,6 +70,17 @@ def save_bottle(cellar_id):
         json.dumps(return_data),
         content_type='application/json',
         status=201
+    )
+
+
+@app.route(api_prefix + '/bottle/<int:bottle_id>/', methods=['PUT'])
+@login_required
+def edit_bottle(bottle_id):
+    data = request.json
+    return Response(
+        json.dumps(data),
+        content_type='application/json',
+        status=200
     )
 
 
