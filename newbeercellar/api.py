@@ -77,8 +77,16 @@ def save_bottle(cellar_id):
 @login_required
 def edit_bottle(bottle_id):
     data = request.json
+
+    db = current_app.db_session
+    bottle = db.query(Bottle).get(bottle_id)
+
+    bottle.update(data)
+    db.add(bottle)
+    db.commit()
+    return_data = bottle.serialize
     return Response(
-        json.dumps(data),
+        json.dumps(return_data),
         content_type='application/json',
         status=200
     )

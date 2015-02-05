@@ -78,6 +78,9 @@ class Bottle(db.Model):
     def __init__(self, beer, cellar, data):
         self.beer = beer
         self.cellar = cellar
+        self.update(data)
+
+    def update(self, data):
         self.amount = data.get('amount', None)
         self.size = data.get('size', None)
         self.comment = data.get('comment', None)
