@@ -5,12 +5,12 @@ var Cellar = this.Cellar || {};
 
         edit: function (e) {
             e.preventDefault();
-            this.props.editBottle(this.props.bottleId);
+            this.props.editBottle();
         },
 
         remove: function (e) {
             e.preventDefault();
-            this.props.removeBottle(this.props.bottleId);
+            this.props.removeBottle();
         },
 
         render: function () {

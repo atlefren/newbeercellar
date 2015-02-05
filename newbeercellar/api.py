@@ -73,9 +73,12 @@ def save_bottle(cellar_id):
     )
 
 
-@app.route(api_prefix + '/bottle/<int:bottle_id>/', methods=['PUT'])
+@app.route(api_prefix + '/bottle/<int:bottle_id>/', methods=['PUT', 'DELETE'])
 @login_required
 def edit_bottle(bottle_id):
+    if request.method == 'DELETE':
+        return Response(status=204)
+
     data = request.json
 
     db = current_app.db_session

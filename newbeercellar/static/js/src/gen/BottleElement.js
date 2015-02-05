@@ -13,7 +13,18 @@ var Cellar = this.Cellar || {};
             this.setState({showEdit: true});
         },
 
-        removeBottle: function (bottleId) {
+        removeBottle: function () {
+            $.ajax({
+                url: '/api/v1/bottle/' + this.state.bottle.id + '/',
+                type: 'DELETE',
+                success: _.bind(this.bottleRemoved, this),
+                dataType: 'json',
+                contentType: 'application/json'
+            });
+        },
+
+        bottleRemoved: function () {
+            this.props.bottleRemoved(this.state.bottle);
         },
 
         createDisplayCell: function (element) {
@@ -80,7 +91,10 @@ var Cellar = this.Cellar || {};
             if (!this.state.showEdit) {
                 elementNodes = _.map(ns.listElements, this.createDisplayCell , this)
                 elementNodes.unshift(
-                    React.createElement(ns.BottleTools, {editBottle: this.editBottle, key: "edit"})
+                    React.createElement(ns.BottleTools, {
+                        editBottle: this.editBottle, 
+                        removeBottle: this.removeBottle, 
+                        key: "edit_delete"})
                 );
             } else {
                 elementNodes = _.map(ns.listElements, this.createEditCell , this)
