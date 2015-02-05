@@ -1,3 +1,4 @@
+/*global React: false */
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
@@ -42,7 +43,7 @@ var Cellar = this.Cellar || {};
     */
     ns.Autocomplete = React.createClass({
 
-        getInitialState: function() {
+        getInitialState: function () {
             return {
                 searchVal: '',
                 results: [],
@@ -54,7 +55,7 @@ var Cellar = this.Cellar || {};
         //trigger a new search, resetting the results and selected item
         search: function () {
             var val = this.refs.value.getDOMNode().value;
-            
+
             //only trigger a search if we have a search value
             if (val !== this.state.searchVal && val !== '') {
                 this.setState({searchVal: val});
@@ -119,7 +120,7 @@ var Cellar = this.Cellar || {};
             var resultsStyle = {display: "block"};
             var itemNodes = [];
             var inputClass = 'form-control';
-            
+
             if (!this.state.results.length || this.state.selectedItem !== null) {
                 //there are no results or we have a selected item
                 resultsStyle = {display: "none"};
@@ -136,7 +137,7 @@ var Cellar = this.Cellar || {};
                             mouseOver={this.mouseOver}
                             selectItem={this.selectItem}/>
                     );
-                }, this);    
+                }, this);
             }
             return (
                 <div className="dropdown autocomplete">

@@ -1,3 +1,5 @@
+/*global React:false, moment:false*/
+
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
@@ -27,13 +29,13 @@ var Cellar = this.Cellar || {};
                 success: onSuccess,
                 dataType: 'json'
             });
-        }
+        };
     }
 
 
     ns.BottleCreator = React.createClass({displayName: "BottleCreator",
 
-        getInitialState: function() {
+        getInitialState: function () {
             return {beerId: null, breweryId: null};
         },
 
@@ -64,7 +66,7 @@ var Cellar = this.Cellar || {};
                 "size": intOrNull(this.refs.size.getDOMNode().value),
                 "amount": parseInt(this.refs.amount.getDOMNode().value, 10),
                 "comment": this.refs.comment.getDOMNode().value
-             };
+            };
 
             $.ajax({
                 url: "/api/v1/cellar/" + this.props.cellarId + "/add/",
@@ -78,7 +80,7 @@ var Cellar = this.Cellar || {};
 
         render: function () {
             var beerSearchParams = {brewery: this.state.breweryId};
-            var disabled = !(this.state.beerId && this.state.breweryId);        
+            var disabled = !(this.state.beerId && this.state.breweryId);
             return (
                 React.createElement("table", {className: "table borderless"}, 
                     React.createElement("tbody", null, 
@@ -133,7 +135,7 @@ var Cellar = this.Cellar || {};
                         )
                     )
                 )
-            );    
+            );
         }
     });
 

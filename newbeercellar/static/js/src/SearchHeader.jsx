@@ -1,3 +1,5 @@
+/*global React: false */
+
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';

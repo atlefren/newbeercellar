@@ -1,26 +1,32 @@
+/*global React: false */
+
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
 
-    var sorts = [null, 'asc', 'desc'];
-    
-    function getNextSort(key) {
-        var i = sorts.indexOf(key) + 1;
-        if (i > sorts.length - 1) {
-            i = 0;
-        }
-        return i;      
-    };
+    function createToggler(list) {
+        return function (key) {
+            var i = list.indexOf(key) + 1;
+            if (i > list.length - 1) {
+                i = 0;
+            }
+            return list[i];
+        };
+    }
+
+
+    var getNextSort = createToggler([null, 'asc', 'desc']);
+
 
     var Header = React.createClass({
 
         getInitialState: function () {
-            return {sortOrder: sorts[0]};
+            return {sortOrder: null};
         },
 
         click: function () {
             if (this.props.sortType) {
-                var sortOrder = sorts[getNextSort(this.state.sortOrder)];
+                var sortOrder = getNextSort(this.state.sortOrder);
                 this.setState({sortOrder: sortOrder});
                 this.props.sortBy(this.props.key2, this.props.sortType, sortOrder);
             }
@@ -32,7 +38,7 @@ var Cellar = this.Cellar || {};
                 if (this.state.sortOrder === 'desc') {
                     sortOrder = "▼";
                 } else if (this.state.sortOrder === 'asc') {
-                    sortOrder = "▲"
+                    sortOrder = "▲";
                 }
             }
             var className = this.props.className;
@@ -82,11 +88,13 @@ var Cellar = this.Cellar || {};
                 );
             }, this);
 
-            return (<thead>
-              <tr>
-                {headings}
-              </tr>
-            </thead>);
+            return (
+                <thead>
+                    <tr>
+                        {headings}
+                    </tr>
+                </thead>
+            );
         }
     });
 

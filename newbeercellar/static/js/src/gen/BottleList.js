@@ -1,10 +1,12 @@
+/*global React: false */
+
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
 
     ns.BottleList = React.createClass({displayName: "BottleList",
 
-        render: function() {
+        render: function () {
             var bottleNodes = _.chain(this.props.bottles)
                 .filter(function (bottle) {
                     return !bottle.hidden;
@@ -23,5 +25,5 @@ var Cellar = this.Cellar || {};
                 React.createElement("tbody", null, bottleNodes)
             );
         }
-    });  
+    });
 }(Cellar));

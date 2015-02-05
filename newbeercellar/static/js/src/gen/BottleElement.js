@@ -1,3 +1,5 @@
+/*global React: false */
+
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
@@ -9,7 +11,7 @@ var Cellar = this.Cellar || {};
             return {showEdit: false, bottle: this.props.bottle, showTools: false};
         },
 
-        editBottle: function (bottleId) {
+        editBottle: function () {
             this.setState({showEdit: true});
         },
 
@@ -94,25 +96,30 @@ var Cellar = this.Cellar || {};
             this.setState({showTools: false});
         },
 
-        render: function () {          
+        render: function () {
             var elementNodes = [];
             if (!this.state.showEdit) {
-                elementNodes = _.map(ns.listElements, this.createDisplayCell , this)
+                elementNodes = _.map(ns.listElements, this.createDisplayCell, this);
                 elementNodes.unshift(
                     React.createElement(ns.BottleTools, {
                         editBottle: this.editBottle, 
                         removeBottle: this.removeBottle, 
                         key: "edit_delete", 
                         isVisible: this.state.showTools})
-                );                
+                );
             } else {
-                elementNodes = _.map(ns.listElements, this.createEditCell , this)
+                elementNodes = _.map(ns.listElements, this.createEditCell, this);
                 elementNodes.unshift(
                     React.createElement(ns.SaveBtn, {saveBottle: this.saveBottle})
                 );                
             }
-            return (React.createElement("tr", {onMouseEnter: this.mouseEnter, onMouseLeave: this.mouseLeave}, elementNodes));
-            
+            return (
+                React.createElement("tr", {
+                    onMouseEnter: this.mouseEnter, 
+                    onMouseLeave: this.mouseLeave}, 
+                    elementNodes
+                )
+            );
         }
     });
 }(Cellar));

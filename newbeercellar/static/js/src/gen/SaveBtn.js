@@ -1,3 +1,5 @@
+/*global React: false */
+
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
@@ -5,7 +7,7 @@ var Cellar = this.Cellar || {};
     ns.SaveBtn = React.createClass({displayName: "SaveBtn",
 
         save: function (e) {
-            e.preventDefault();         
+            e.preventDefault();
             this.props.saveBottle();
         },
 

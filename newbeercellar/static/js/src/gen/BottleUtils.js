@@ -1,11 +1,14 @@
+/*global React: false, moment:false */
+
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
 
-    
+
     function wrapRatebeerLink(text, bottle) {
         return (React.createElement("a", {href: bottle.ratebeerUrl}, text));
     }
+
 
     ns.listElements = [
         {name: "Brewery", sort: "alph", property: 'breweryName', className: 'td-20', editable: false},
@@ -29,7 +32,7 @@ var Cellar = this.Cellar || {};
             },
             toDisplay: function (value) {
                 if (value) {
-                    return moment(value).format('DD.MM.YYYY');    
+                    return moment(value).format('DD.MM.YYYY');
                 }
                 return '';
             },
@@ -48,7 +51,7 @@ var Cellar = this.Cellar || {};
 
 
     ns.bottleRendrers = {
-        'string': function (data, key) {            
+        string: function (data, key) {
             return (
                 React.createElement("input", {
                     className: "form-control", 
@@ -60,7 +63,7 @@ var Cellar = this.Cellar || {};
                     type: "text"})
             );
         },
-        'date': function (data, key) {
+        date: function (data, key) {
             return (
                 React.createElement(ns.DatePicker, {
                 onChange: _.bind(this.formChange, this, key), 
@@ -69,7 +72,7 @@ var Cellar = this.Cellar || {};
                 ref: key})
             );
         },
-        'text':function (data, key) {
+        text: function (data, key) {
             return (
                 React.createElement("textarea", {
                     className: "form-control", 
@@ -79,8 +82,8 @@ var Cellar = this.Cellar || {};
                     onChange: _.bind(this.formChange, this, key), 
                     key: key})
             );
-        }, 
-        'int': function (data, key) {
+        },
+        int: function (data, key) {
             return (
                 React.createElement("input", {
                     type: "number", 
@@ -93,6 +96,5 @@ var Cellar = this.Cellar || {};
             );
         }
     };
-
 
 }(Cellar));

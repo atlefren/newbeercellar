@@ -1,10 +1,12 @@
+/*global React: false */
+
 var Cellar = this.Cellar || {};
 (function (ns) {
-  'use strict';
-  
-      ns.DatePicker = React.createClass({displayName: "DatePicker",
+    'use strict';
 
-        componentDidMount: function() {
+    ns.DatePicker = React.createClass({displayName: "DatePicker",
+
+        componentDidMount: function () {
             $(this.getDOMNode()).datepicker({
                 format: 'dd.mm.yyyy'
             }).on('changeDate', _.bind(this.onChange, this));

@@ -1,11 +1,14 @@
+/*global React: false, moment:false */
+
 var Cellar = this.Cellar || {};
 (function (ns) {
     'use strict';
 
-    
+
     function wrapRatebeerLink(text, bottle) {
         return (<a href={bottle.ratebeerUrl}>{text}</a>);
     }
+
 
     ns.listElements = [
         {name: "Brewery", sort: "alph", property: 'breweryName', className: 'td-20', editable: false},
@@ -29,7 +32,7 @@ var Cellar = this.Cellar || {};
             },
             toDisplay: function (value) {
                 if (value) {
-                    return moment(value).format('DD.MM.YYYY');    
+                    return moment(value).format('DD.MM.YYYY');
                 }
                 return '';
             },
@@ -48,9 +51,9 @@ var Cellar = this.Cellar || {};
 
 
     ns.bottleRendrers = {
-        'string': function (data, key) {            
+        string: function (data, key) {
             return (
-                <input 
+                <input
                     className="form-control"
                     ref={key}
                     key={key}
@@ -60,7 +63,7 @@ var Cellar = this.Cellar || {};
                     type="text" />
             );
         },
-        'date': function (data, key) {
+        date: function (data, key) {
             return (
                 <ns.DatePicker
                 onChange={_.bind(this.formChange, this, key)}
@@ -69,30 +72,29 @@ var Cellar = this.Cellar || {};
                 ref={key} />
             );
         },
-        'text':function (data, key) {
+        text: function (data, key) {
             return (
-                <textarea 
-                    className="form-control" 
+                <textarea
+                    className="form-control"
                     ref={key}
-                    value={data}                     
+                    value={data}
                     defaultValue=""
                     onChange={_.bind(this.formChange, this, key)}
                     key={key} />
             );
-        }, 
-        'int': function (data, key) {
+        },
+        int: function (data, key) {
             return (
                 <input
                     type="number"
                     className="form-control"
                     ref={key}
-                    value={data}         
+                    value={data}
                     defaultValue=""
                     onChange={_.bind(this.formChange, this, key)}
                     key={key} />
             );
         }
     };
-
 
 }(Cellar));
