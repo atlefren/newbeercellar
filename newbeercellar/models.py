@@ -154,6 +154,7 @@ class RbBeer(db.Model):
             'id': self.id,
             'name': self.name,
             'brewery': self.brewery.name,
+            "breweryId": self.brewery.id,
         }
 
     @property

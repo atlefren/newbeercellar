@@ -42,7 +42,8 @@ var Cellar = this.Cellar || {};
         },
 
         selectBeer: function (beer) {
-            this.setState({beerId: beer.id});
+            this.refs.brewery.setValue(beer.brewery);
+            this.setState({beerId: beer.id, breweryId: beer.breweryId});
         },
 
         bottleAdded: function (bottle) {
@@ -85,6 +86,7 @@ var Cellar = this.Cellar || {};
                             <td className="td-20">
                                 <ns.Autocomplete 
                                     placeholder="Brewery" 
+                                    ref="brewery"
                                     autocompleteSearch={getAutocompleteSearch('/api/v1/search/brewery/')}
                                     select={this.selectBrewery} />
                               </td>

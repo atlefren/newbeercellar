@@ -70,6 +70,10 @@ var Cellar = this.Cellar || {};
             this.setState({searchVal: val});
         },
 
+        setValue: function (value) {
+            this.setState({searchVal: value});
+        },
+
         //show the result list, select the first item
         showResults: function (results) {
             this.setState({results: results, selectedIdx: 0});
