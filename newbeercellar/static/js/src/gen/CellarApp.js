@@ -21,6 +21,13 @@ var Cellar = this.Cellar || {};
             });
         },
 
+        bottleRemoved: function (removedBottle) {
+            var newBottles = _.reject(this.state.bottles, function (bottle) {
+                return (bottle.id === removedBottle.id);
+            });
+            this.setState({bottles: newBottles});
+        },
+
         cancelAdd: function () {
             this.setState({showCreate: false});
         },
@@ -91,7 +98,9 @@ var Cellar = this.Cellar || {};
                     creator, 
                     React.createElement("table", {className: "table"}, 
                         React.createElement(ns.TableHeader, {sortBy: this.sortBy}), 
-                        React.createElement(ns.BottleList, {bottles: this.state.bottles})
+                        React.createElement(ns.BottleList, {
+                            bottles: this.state.bottles, 
+                            bottleRemoved: this.bottleRemoved})
                     )
                 )
             );  
