@@ -24,7 +24,7 @@ var Cellar = this.Cellar || {};
                     return (
                         <ns.BottleElement
                             bottleRemoved={this.bottleRemoved}
-                            bottle={bottle} 
+                            bottle={bottle}
                             key={bottle.id} />
                     );
                 }, this)

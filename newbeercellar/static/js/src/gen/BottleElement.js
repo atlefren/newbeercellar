@@ -6,7 +6,7 @@ var Cellar = this.Cellar || {};
     ns.BottleElement = React.createClass({displayName: "BottleElement",
 
         getInitialState: function () {
-            return {showEdit: false, bottle: this.props.bottle};
+            return {showEdit: false, bottle: this.props.bottle, showTools: false};
         },
 
         editBottle: function (bottleId) {
@@ -86,6 +86,14 @@ var Cellar = this.Cellar || {};
             this.setState({bottle: bottle});
         },
 
+        mouseEnter: function () {
+            this.setState({showTools: true});
+        },
+
+        mouseLeave: function () {
+            this.setState({showTools: false});
+        },
+
         render: function () {          
             var elementNodes = [];
             if (!this.state.showEdit) {
@@ -94,15 +102,16 @@ var Cellar = this.Cellar || {};
                     React.createElement(ns.BottleTools, {
                         editBottle: this.editBottle, 
                         removeBottle: this.removeBottle, 
-                        key: "edit_delete"})
-                );
+                        key: "edit_delete", 
+                        isVisible: this.state.showTools})
+                );                
             } else {
                 elementNodes = _.map(ns.listElements, this.createEditCell , this)
                 elementNodes.unshift(
                     React.createElement(ns.SaveBtn, {saveBottle: this.saveBottle})
                 );                
             }
-            return (React.createElement("tr", null, elementNodes));
+            return (React.createElement("tr", {onMouseEnter: this.mouseEnter, onMouseLeave: this.mouseLeave}, elementNodes));
             
         }
     });

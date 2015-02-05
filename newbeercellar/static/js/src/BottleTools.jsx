@@ -14,14 +14,20 @@ var Cellar = this.Cellar || {};
         },
 
         render: function () {
+            var hidden;
+            if (!this.props.isVisible) {
+                hidden = "hidden";
+            }
             return (
                 <td className="td-3">
+                <div className={hidden}>
                     <a className="table-tool" href="" title="Edit" onClick={this.edit}>
                         <span className="glyphicon glyphicon-edit"></span>
                     </a>
                     <a className="table-tool" href=""  title="Remove" onClick={this.remove}>
                         <span className="glyphicon glyphicon-remove-circle"></span>
                     </a>
+                    </div>
                 </td>
             );
         }
