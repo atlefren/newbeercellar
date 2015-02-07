@@ -1,11 +1,7 @@
 ---
 - hosts: development
   sudo: yes
-  vars:
-    database:
-        name: beer
-        username: beer
-        password: beer
+
   tasks:
 
   - name: ensure apt cache is up to date

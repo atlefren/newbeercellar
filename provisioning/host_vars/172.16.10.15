@@ -1,7 +1,0 @@
----
-database:
-    - name: beers
-      username: beer
-      password: beer
-nginx_sites:
-  - beercellar

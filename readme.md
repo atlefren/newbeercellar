@@ -37,7 +37,7 @@ Setup
 
 1. go to https://console.developers.google.com/project, create a new project, go to Credentials and "create new CLient id". Choose web application, and enter http://localhost:9080/oauth2callback as redirect uri
 
-2. copy provisioning/settings.py.j2_example to provisioning/settings.py.j2, and fill in GOOGLE_LOGIN_CLIENT_ID, GOOGLE_LOGIN_CLIENT_SECRET and SECRET_KEY
+2. copy provisioning/host_vars/development_example to provisioning/host_vars/172.16.10.15, and fill the missing parts
 
 3. run vagrant up dev
 

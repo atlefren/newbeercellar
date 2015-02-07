@@ -6,6 +6,6 @@ newbeercellar/static/.webassets-cache/
 newbeercellar/static/gen
 newbeercellar/settings.py
 .vagrant/
-provisioning/settings.py.j2
 .env
 venv/
+provisioning/host_vars/172.16.10.15
