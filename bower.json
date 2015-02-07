@@ -18,6 +18,6 @@
     "react": "~0.12.2",
     "underscore": "~1.7.0",
     "momentjs": "~2.9.0",
-    "https://github.com/eternicode/bootstrap-datepicker.git#a6abb1ac69711bfe7158f0297bf2946fb05ec29b"
+    "bootstrap-datepicker": "https://github.com/eternicode/bootstrap-datepicker.git#a6abb1ac69711bfe7158f0297bf2946fb05ec29b"
   }
 }
