@@ -1,0 +1,8 @@
+[uwsgi]
+plugin = python
+workers = 5
+threads = 2
+chdir = {{ app.root }}
+home = {{ app.root }}/venv
+module = app
+callable = app

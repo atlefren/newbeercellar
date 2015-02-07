@@ -1,0 +1,43 @@
+---
+- name: install packages
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600
+  with_items:
+    - git
+
+- name: ensure app root exists
+  file: path={{ app.root }}
+        state=directory
+        mode=0755
+        owner=root
+        group=root
+
+- name: clone repos from github
+  git: repo={{app.repo}}
+       dest={{ app.root }}
+       version={{ app.version }}
+  with_items: repos.github
+  notify:
+    - restart uwsgi
+
+- name: install pio requirements
+  pip: requirements={{ app.root }}/requirements.txt
+       virtualenv={{ app.root }}/venv
+  notify:
+    - restart uwsgi
+
+- name: install bower packages
+  command: bower install chdir={{ app.root }}
+  sudo: false
+
+- name: ensure that www-data can write webassets cache
+  file: >
+        path={{ app.root }}/{{ app.name }}/static/.webassets-cache
+        owner=www-data
+        group=www-data
+        mode=0755
+        state=directory
+
+- name: create settings.py for project
+    template: src=settings.py.j2
+              dest={{ app.root }}/{{ app.name }}/settings.py
+              mode=0600
