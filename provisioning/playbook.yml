@@ -22,9 +22,9 @@
       tags: database
     - role: nginx
       tags: nginx
+    - role: packages
+      tags: packages
     - role: deploy
       tags: deploy
     - role: uwsgi
       tags: uwsgi
-    - role: packages
-      tags: packages

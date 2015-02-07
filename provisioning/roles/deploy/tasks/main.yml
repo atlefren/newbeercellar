@@ -12,14 +12,14 @@
         group=root
 
 - name: clone repos from github
-  git: repo={{app.repo}}
+  git: repo=https://github.com/atlefren/newbeercellar.git
        dest={{ app.root }}
        version={{ app.version }}
-  with_items: repos.github
+       accept_hostkey=True
   notify:
     - restart uwsgi
 
-- name: install pio requirements
+- name: install pip requirements
   pip: requirements={{ app.root }}/requirements.txt
        virtualenv={{ app.root }}/venv
   notify:
@@ -38,6 +38,8 @@
         state=directory
 
 - name: create settings.py for project
-    template: src=settings.py.j2
-              dest={{ app.root }}/{{ app.name }}/settings.py
-              mode=0600
+  template: src=settings.py.j2
+            dest={{ app.root }}/{{ app.name }}/settings.py
+            mode=0600
+
+
