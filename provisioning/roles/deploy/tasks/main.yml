@@ -26,8 +26,7 @@
     - restart uwsgi
 
 - name: install bower packages
-  command: bower install chdir={{ app.root }}
-  sudo: false
+  command: bower install --allow-root chdir={{ app.root }}
 
 - name: ensure that www-data can write webassets cache
   file: >

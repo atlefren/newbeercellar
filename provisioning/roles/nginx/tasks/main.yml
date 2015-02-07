@@ -4,7 +4,7 @@
 
   - name: copy nginx sites
     template: src=nginx.j2
-              dest=/etc/nginx/sites-available/beercellar
+              dest=/etc/nginx/sites-available/{{app.name}}
               owner=root
               group=root
               mode=0644
@@ -12,8 +12,8 @@
       - restart nginx
 
   - name: enable nginx sites
-    file: src=/etc/nginx/sites-available/beercellar
-          dest=/etc/nginx/sites-enabled/beercellar
+    file: src=/etc/nginx/sites-available/{{app.name}}
+          dest=/etc/nginx/sites-enabled/{{app.name}}
           owner=root
           group=root
           state=link
