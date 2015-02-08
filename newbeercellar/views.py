@@ -55,7 +55,12 @@ def owns_cellar(cellar):
 def view_cellar(username, cellar_id):
     cellar = get_cellar(cellar_id)
     is_owner = owns_cellar(cellar)
-    if cellar.is_public or is_owner:
+    if cellar.is_public:
+        if cellar.user.username == username:
+            return return_cellar(serialize_cellar(cellar), is_owner, username)
+        else:
+            abort(404)
+    if is_owner:
         return return_cellar(serialize_cellar(cellar), is_owner, username)
     if not current_user.is_authenticated():
         abort(401)
