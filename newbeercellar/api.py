@@ -79,6 +79,9 @@ def edit_bottle(bottle_id):
     db = current_app.db_session
     bottle = db.query(Bottle).get(bottle_id)
 
+    if bottle.cellar.user_id != current_user.id:
+        return generate_error(403, 'Not your cellar!')
+
     if request.method == 'DELETE':
         db.delete(bottle)
         db.commit()
