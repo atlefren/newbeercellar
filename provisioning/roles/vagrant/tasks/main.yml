@@ -32,11 +32,7 @@
               dest=/vagrant/.env
               mode=0600
 
-  - name: create settings.py for project
-    sudo_user: vagrant
-    template: src=settings.py.j2
-              dest=/vagrant/newbeercellar/settings.py
-              mode=0600
-
   - name: run migrations
     command: /vagrant/venv/bin/python /vagrant/manage.py db upgrade chdir=/vagrant
+    environment:
+        SQLALCHEMY_DATABASE_URI: postgresql://{{database.username}}:{{database.password}}@localhost:5432/{{database.name}}

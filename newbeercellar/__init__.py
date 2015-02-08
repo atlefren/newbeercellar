@@ -7,11 +7,10 @@ from flask_googlelogin import GoogleLogin
 from flask_login import LoginManager
 from flask.ext.sqlalchemy import SQLAlchemy
 
-# from database import init_db
 
-# load config
 app = Flask(__name__)
 
+# load config
 app.config.update(
     DEBUG=os.environ.get('DEBUG', False),
     SECRET_KEY=os.environ.get('SECRET_KEY', ''),

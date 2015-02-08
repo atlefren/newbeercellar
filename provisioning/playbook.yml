@@ -2,8 +2,8 @@
 - hosts: development
   sudo: yes
   roles:
-    - role: setup
-      tags: setup
+    #- role: setup
+    #  tags: setup
     - role: database
       tags: database
     - role: nginx
