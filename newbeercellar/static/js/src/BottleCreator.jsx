@@ -109,7 +109,7 @@ var Cellar = this.Cellar || {};
                                 <ns.DatePicker ref="bbfdate" placeholder="best before date"/>
                               </td>
                               <td  className="td-5"> 
-                                <input type="date" ref="size" className="form-control" placeholder="size (cl)"/>
+                                <input type="text" ref="size" className="form-control" placeholder="size (cl)"/>
                               </td>
                               <td  className="td-5">
                                 <input type="number" defaultValue="1" ref="amount" className="form-control"/>

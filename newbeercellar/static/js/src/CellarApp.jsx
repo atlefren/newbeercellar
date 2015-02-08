@@ -99,7 +99,8 @@ var Cellar = this.Cellar || {};
                     {creator}
                     <table className="table">
                         <ns.TableHeader sortBy={this.sortBy} />
-                        <ns.BottleList 
+                        <ns.BottleList
+                            isEditable={this.props.isEditable}
                             bottles={this.state.bottles}
                             bottleRemoved={this.bottleRemoved} />
                     </table>                    

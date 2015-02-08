@@ -89,7 +89,9 @@ var Cellar = this.Cellar || {};
         },
 
         mouseEnter: function () {
-            this.setState({showTools: true});
+            if (this.props.isEditable) {
+                this.setState({showTools: true});
+            }
         },
 
         mouseLeave: function () {

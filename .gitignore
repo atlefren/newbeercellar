@@ -10,3 +10,4 @@ newbeercellar/settings.py
 .env
 venv/
 provisioning/host_vars/172.16.10.15
+provisioning/host_vars/beercellar_do

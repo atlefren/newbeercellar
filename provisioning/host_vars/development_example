@@ -12,3 +12,7 @@
   flask_settings:
     debug: True
     secret_key: your_secret_key
+
+  app:
+    root: /vagrant
+    name: newbeercellar
