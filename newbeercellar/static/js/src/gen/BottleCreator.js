@@ -109,7 +109,7 @@ var Cellar = this.Cellar || {};
                                 React.createElement(ns.DatePicker, {ref: "bbfdate", placeholder: "best before date"})
                               ), 
                               React.createElement("td", {className: "td-5"}, 
-                                React.createElement("input", {type: "date", ref: "size", className: "form-control", placeholder: "size (cl)"})
+                                React.createElement("input", {type: "text", ref: "size", className: "form-control", placeholder: "size (cl)"})
                               ), 
                               React.createElement("td", {className: "td-5"}, 
                                 React.createElement("input", {type: "number", defaultValue: "1", ref: "amount", className: "form-control"})
