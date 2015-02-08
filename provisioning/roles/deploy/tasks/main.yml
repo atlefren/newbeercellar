@@ -35,10 +35,3 @@
         group=www-data
         mode=0755
         state=directory
-
-- name: create settings.py for project
-  template: src=settings.py.j2
-            dest={{ app.root }}/{{ app.name }}/settings.py
-            mode=0600
-
-

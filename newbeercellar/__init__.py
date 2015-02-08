@@ -14,9 +14,6 @@ app = Flask(__name__)
 
 db = SQLAlchemy(app)
 
-# load config
-app.config.from_object('newbeercellar.settings')
-
 # setup assetbundle
 assets = Environment(app)
 assets.debug = True if app.debug == 'True' else False

@@ -2,7 +2,14 @@
 plugin = python
 workers = 5
 threads = 2
+pp = {{ app.root }}
 chdir = {{ app.root }}
 home = {{ app.root }}/venv
 module = runapp
 callable = app
+env = SECRET_KEY = {{flask_settings.secret_key}}
+env = GOOGLE_LOGIN_CLIENT_ID = {{login_settings.google_client_id}}
+env = GOOGLE_LOGIN_CLIENT_SECRET = {{login_settings.google_client_secret}}
+env = GOOGLE_LOGIN_REDIRECT_URI = {{login_settings.login_redirect_uri}}
+env = DEBUG = {{flask_settings.debug}}
+env = SQLALCHEMY_DATABASE_URI = postgresql://{{database.username}}:{{database.password}}@localhost:5432/{{database.name}}
