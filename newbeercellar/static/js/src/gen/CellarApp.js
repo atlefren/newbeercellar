@@ -100,6 +100,7 @@ var Cellar = this.Cellar || {};
                     React.createElement("table", {className: "table"}, 
                         React.createElement(ns.TableHeader, {sortBy: this.sortBy}), 
                         React.createElement(ns.BottleList, {
+                            isEditable: this.props.isEditable, 
                             bottles: this.state.bottles, 
                             bottleRemoved: this.bottleRemoved})
                     )

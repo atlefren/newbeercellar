@@ -14,6 +14,7 @@ var Cellar = this.Cellar || {};
                 .map(function (bottle) {
                     return (
                         React.createElement(ns.BottleElement, {
+                            isEditable: this.props.isEditable, 
                             bottleRemoved: this.props.bottleRemoved, 
                             bottle: bottle, 
                             key: bottle.id})
