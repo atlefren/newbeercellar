@@ -73,7 +73,7 @@ def view_cellar(username, cellar_id):
 def edit_cellar(username, cellar_id):
     cellar = get_cellar(cellar_id)
     if request.method == 'POST':
-        is_public = request.form.get('is_public')
+        is_public = True if request.form.get('is_public') == 'on' else False
         name = request.form.get('cellar_name')
         update_cellar(cellar, name, is_public)
         flash('Cellar updated')

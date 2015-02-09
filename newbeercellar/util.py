@@ -12,7 +12,6 @@ def serialize_cellar(cellar):
         key=lambda x: x["id"],
         reverse=True
     )
-    print bottles
     return {
         "cellarId": cellar.id,
         "cellarName": cellar.name,
