@@ -64,6 +64,13 @@ def cellars_for_user(user_id):
     ).all()
 
 
+def update_cellar(cellar, name, is_public):
+    cellar.name = name
+    cellar.is_public = is_public
+    current_app.db_session.add(cellar)
+    current_app.db_session.commit()
+
+
 def get_user_by_username(username):
     return current_app.db_session.query(User).filter(User.username == username).first()
 

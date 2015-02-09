@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Beercellar - {{cellar_name}}{% endblock %}
+
+{% block main %}
+    {{ super() }}
+    <div class="container">        
+        <h2>Edit cellar</h2>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-success" role="alert">
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form class="form-horizontal" method="post">
+          <div class="form-group">
+            <label for="cellar_name" class="col-sm-2 control-label">Cellar name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="cellar_name" name="cellar_name" value="{{cellar.name}}">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label>
+                  <input name="is_public" type="checkbox" {% if cellar.is_public %} checked {% endif %}> Public?
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </form>
+    </div>
+{% endblock %}

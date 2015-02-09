@@ -2,13 +2,14 @@
 
 import simplejson as json
 
-from flask import render_template, abort, redirect, url_for
+from flask import render_template, abort, redirect, url_for, request, flash
 from flask_login import login_required
 from flask.ext.login import current_user
 
 from newbeercellar import app
 from util import (cellars_for_user, get_cellar, serialize_cellar,
-                  get_user_by_username, public_cellars_for_username)
+                  get_user_by_username, public_cellars_for_username,
+                  update_cellar)
 from decorators import cellar_owner
 
 
@@ -66,11 +67,17 @@ def view_cellar(username, cellar_id):
     abort(403)
 
 
-@app.route('/<string:username>/cellars/<int:cellar_id>/edit')
+@app.route('/<string:username>/cellars/<int:cellar_id>/edit', methods=['GET', 'POST'])
 @login_required
 @cellar_owner
 def edit_cellar(username, cellar_id):
-    return "edit cellar"
+    cellar = get_cellar(cellar_id)
+    if request.method == 'POST':
+        is_public = request.form.get('is_public')
+        name = request.form.get('cellar_name')
+        update_cellar(cellar, name, is_public)
+        flash('Cellar updated')
+    return render_template('edit_cellar.html', cellar=cellar)
 
 
 @app.route('/profile')
