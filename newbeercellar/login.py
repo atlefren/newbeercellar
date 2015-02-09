@@ -4,6 +4,7 @@ from flask_googlelogin import USERINFO_EMAIL_SCOPE
 
 from newbeercellar import login_manager, app, googlelogin
 from models import User
+from util import get_or_create_default_cellar
 
 
 @app.route("/login")
@@ -52,4 +53,9 @@ def create_or_update_user(token, userinfo, **params):
     db.commit()
     db.flush()
     login_user(user)
-    return redirect(url_for('defaultcellar', username=user.username))
+    cellar = get_or_create_default_cellar(user)
+    return redirect(url_for(
+        'view_cellar',
+        username=user.username,
+        cellar_id=cellar.id
+    ))

@@ -7,9 +7,8 @@ from flask_login import login_required
 from flask.ext.login import current_user
 
 from newbeercellar import app
-from util import (get_or_create_default_cellar, cellars_for_user,
-                  get_cellar, serialize_cellar, get_user_by_username,
-                  public_cellars_for_username)
+from util import (cellars_for_user, get_cellar, serialize_cellar,
+                  get_user_by_username, public_cellars_for_username)
 from decorators import cellar_owner
 
 
@@ -78,13 +77,3 @@ def edit_cellar(username, cellar_id):
 @login_required
 def edit_profile():
     return "edit profile"
-
-
-@app.route('/<string:username>/defaultcellar')
-@login_required
-def defaultcellar(username):
-    return return_cellar(
-        get_or_create_default_cellar(current_user),
-        True,
-        username
-    )

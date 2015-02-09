@@ -54,7 +54,7 @@ def get_or_create_default_cellar(user):
         current_app.db_session.add(cellar)
         current_app.db_session.commit()
 
-    return serialize_cellar(cellar)
+    return cellar
 
 
 def cellars_for_user(user_id):
