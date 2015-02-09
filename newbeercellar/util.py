@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import current_app
+from flask import current_app, flash
 from sqlalchemy.orm.exc import NoResultFound
 
 from models import Cellar, User
@@ -50,6 +50,7 @@ def get_or_create_default_cellar(user):
             Cellar.is_default == True
         ).one()
     except NoResultFound:
+        flash('created')
         cellar = Cellar('My Beer Cellar', user, is_default=True)
         current_app.db_session.add(cellar)
         current_app.db_session.commit()

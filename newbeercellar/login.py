@@ -41,7 +41,6 @@ def create_or_update_user(token, userinfo, **params):
         user.name = userinfo['name']
 
     else:
-
         user = User(
             google_id=userinfo['id'],
             name=userinfo['name'],
