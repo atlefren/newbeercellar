@@ -11,6 +11,7 @@
             <div class="alert alert-success" role="alert">
             {% for message in messages %}
               {{ message }}
+              <a href="{{url_for('view_cellar', username=current_user.username, cellar_id=cellar.id)}}">View cellar</a>
             {% endfor %}
             </div>
           {% endif %}
