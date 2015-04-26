@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+    {% block title %}Beercellar - Beer name{% endblock %}
+    {% block main %}
+    {{ super() }}
+    <div class="container">
+        <h2>{{beer.name}}</h2>
+        <ul>
+            <li>Brewed by {{beer.brewery.name}}</li>
+            <li>See more at <a href="{{beer.ratebeer_url}}">Ratebeer</a></li>
+            <li>Ratebeer score: {{beer.rating}} / 100</li>
+            {% if amount %}
+            <li>You have {{amount}} bottle(s)</li>
+            {% endif %}
+        </ul>
+        {% if own_cellars %}
+        <p>My cellars with this beer: </p>
+        <ul>
+        {% for cellar in own_cellars %}
+            <li><a href="/{{cellar.user.username}}/cellars/{{cellar.id}}">{{cellar.name}}</a></li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        <p>Other cellars with this beer: </p>
+        <ul>
+        {% for cellar in cellars %}
+            <li><a href="/{{cellar.user.username}}/cellars/{{cellar.id}}">{{cellar.name}} ({{cellar.user.name}})</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endblock %}

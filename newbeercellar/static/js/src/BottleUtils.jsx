@@ -6,7 +6,8 @@ var Cellar = this.Cellar || {};
 
 
     function wrapRatebeerLink(text, bottle) {
-        return (<a href={bottle.ratebeerUrl}>{text}</a>);
+        var url = '/beer/' + bottle.beerId;
+        return (<a href={url}>{text}</a>);
     }
 
 

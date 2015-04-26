@@ -6,7 +6,8 @@ var Cellar = this.Cellar || {};
 
 
     function wrapRatebeerLink(text, bottle) {
-        return (React.createElement("a", {href: bottle.ratebeerUrl}, text));
+        var url = '/beer/' + bottle.beerId;
+        return (React.createElement("a", {href: url}, text));
     }
 
 

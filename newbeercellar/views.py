@@ -9,7 +9,7 @@ from flask.ext.login import current_user
 from newbeercellar import app
 from util import (cellars_for_user, get_cellar, serialize_cellar,
                   get_user_by_username, public_cellars_for_username,
-                  update_cellar)
+                  update_cellar, get_beer, cellars_with_beer, number_of_beers)
 from decorators import cellar_owner
 
 
@@ -18,6 +18,27 @@ def index():
     if not current_user.is_authenticated():
         return render_template('index.html')
     return redirect(url_for('cellar_list', username=current_user.username))
+
+
+@app.route('/beer/<int:beer_id>')
+def beer(beer_id):
+    beer = get_beer(beer_id)
+    user = None
+    own_cellars = None
+    amount = None
+    if current_user.is_authenticated():
+        user = current_user
+        own_cellars = cellars_with_beer(beer, user, exclude=False)
+        amount = number_of_beers(beer, user)
+    cellars = cellars_with_beer(beer, user)
+
+    return render_template(
+        'beer.html',
+        beer=beer,
+        cellars=cellars,
+        own_cellars=own_cellars,
+        amount=amount
+    )
 
 
 @app.route('/<string:username>/cellars/')
