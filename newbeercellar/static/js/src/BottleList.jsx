@@ -17,6 +17,7 @@ var Cellar = this.Cellar || {};
                             isEditable={this.props.isEditable}
                             bottleRemoved={this.props.bottleRemoved}
                             bottle={bottle}
+                            bottleEdited={this.props.bottleEdited}
                             key={bottle.id} />
                     );
                 }, this)

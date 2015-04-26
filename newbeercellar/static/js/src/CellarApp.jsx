@@ -10,6 +10,20 @@ var Cellar = this.Cellar || {};
     }
 
 
+    var BottleCounter = React.createClass({
+
+        numBottles: function () {
+            return _.reduce(this.props.bottles, function (acc, bottle) {
+                return acc += bottle.amount;
+            }, 0);
+        },
+
+        render: function () {
+            var num = this.numBottles();
+            return (<p>Number of bottles: {num}</p>);
+        }
+    })
+
     var Cellar = React.createClass({
 
         getInitialState: function () {
@@ -28,6 +42,16 @@ var Cellar = this.Cellar || {};
                 return (bottle.id === removedBottle.id);
             });
             this.setState({bottles: newBottles});
+        },
+
+        bottleEdited: function (editedBottle) {
+            var bottles = _.map(this.state.bottles, function (bottle) {
+                if (bottle.id === editedBottle.id) {
+                    bottle.amount = editedBottle.amount;
+                }
+                return bottle;
+            });
+            this.setState({bottles: bottles});
         },
 
         cancelAdd: function () {
@@ -83,7 +107,6 @@ var Cellar = this.Cellar || {};
                                 className={addClass}
                                 onClick={this.toggleCreate}>Add Bottle</button>;
             }
-
             return (
                 <div>
                     <div className="row">
@@ -102,8 +125,10 @@ var Cellar = this.Cellar || {};
                         <ns.BottleList
                             isEditable={this.props.isEditable}
                             bottles={this.state.bottles}
+                            bottleEdited={this.bottleEdited}
                             bottleRemoved={this.bottleRemoved} />
-                    </table>                    
+                    </table>
+                    <BottleCounter bottles={this.state.bottles}/>
                 </div>
             );
         }

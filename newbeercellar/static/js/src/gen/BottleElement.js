@@ -75,6 +75,7 @@ var Cellar = this.Cellar || {};
 
         bottleSaved: function (bottle) {
             this.setState({bottle: bottle, showEdit: false});
+            this.props.bottleEdited(bottle);
         },
 
         formChange: function (key, event) {
